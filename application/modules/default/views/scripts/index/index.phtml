@@ -1,0 +1,9 @@
+<form class="form-signin" id="formLogin">
+    <?= $this->form->username ?>
+    <?= $this->form->password ?>
+    <?= $this->form->csrf ?>
+    <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+    <div id="errors" style="margin-top: 5px; padding: 5px; text-align: center; height: 30px">
+        <span id="errorMsg" style="display: none"></span>
+    </div>       
+</form>

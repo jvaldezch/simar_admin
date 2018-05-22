@@ -1,0 +1,14 @@
+<form action="<?= $this->form->getAction() ?>" method="post" id="address">
+    <?= $this->form->rfc ?>
+    <?= $this->form->razonSocial ?>
+    <?= $this->form->calle ?>
+    <?= $this->form->numExterior ?>
+    <?= $this->form->numInterior ?>
+    <?= $this->form->colonia ?>
+    <?= $this->form->localidad ?>
+    <?= $this->form->estado ?>
+    <?= $this->form->cp ?>
+    <?= $this->form->pais ?>
+    <button class="btn btn-primary pull-right" type="submit" id="submit">Actualizar datos</button>
+    <a class="btn btn-warning" href="/administrador/clientes/index" role="button">«&nbsp;Regresar</a>
+</form>

@@ -1,0 +1,33 @@
+<form action="<?= $this->form->getAction() ?>" method="post" id="customs">
+    <?= $this->form->idAgente ?>
+    <?= $this->form->rfc ?>
+    <?= $this->form->razonSocial ?>
+    <?= $this->form->idAduana ?>
+    <button class="btn btn-primary pull-right" type="submit" id="submit">Asignar</button>
+</form>
+<div class="row" style="margin-bottom: 5px"></div>
+<?php if(isset($this->data) && !empty($this->data)) { ?>
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Aduana</th>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->data as $item) { ?>
+        <tr>
+            <td><?= $item["id"] ?></td>
+            <td><?= $item["aduana"] . (isset($item["seccion"]) ? $item["seccion"] : '') ?></td>
+            <td><?= $item["nombre"] ?></td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<?php } else { ?>
+<p class="bg-danger">
+    El agente no tiene aduanas asignadas.
+</p>
+<?php } ?>
+<a class="btn btn-warning" href="/administrador/agentes/index" role="button">«&nbsp;Regresar</a>

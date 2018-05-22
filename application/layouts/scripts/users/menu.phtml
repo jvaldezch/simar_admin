@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <?php if (isset($this->menus)) { ?>
+                    <?php foreach ($this->menus as $item) { ?>
+                        <?php if(isset($item["submenu"]) && empty($item["submenu"])) { ?>
+                            <li<?= (strtolower($item["controlador"]) == $this->currentController) ? ' class="active"' : '' ?>><a href="<?= $item["accion"] ?>"><?= $item["descripcion"] ?></a></li>                    
+                        <?php } elseif(isset($item["submenu"]) && !empty($item["submenu"])) { ?>
+                            <li class="dropdown">
+                                <a href="<?= $item["accion"] ?>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $item["descripcion"] ?><span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?= $item["accion"] ?>"><?= $item["descripcion"] ?></a></li>
+                                <?php foreach ($item["submenu"] as $sub) { ?>
+                                    <li><a href="<?= $sub["accion"] ?>"><?= $sub["descripcion"] ?></a></li>
+                                <?php } ?>
+                                </ul>
+                            </li>
+                        <?php } ?>
+                    <?php } ?>
+                <?php } ?>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/default/auth/logout">Salir</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>

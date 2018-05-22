@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title><?= $this->title ?></title>
+        <meta name="author" content="SitePoint">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<?= $this->headMeta(); ?>
+        <?= $this->headLink(); ?>
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <?= $this->layout()->content; ?>
+        <?= $this->headScript() ?>
+    </body>
+</html>

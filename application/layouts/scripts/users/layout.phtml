@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title><?= $this->title ?></title>
+        <meta name="author" content="SitePoint">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/favicon.png" rel="icon shortcut" >
+        <?= $this->headMeta(); ?>
+        <?= $this->headLink(); ?>
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body style="background-color: #f0f0f0">
+        <div class="container-fluid">
+            <div class="row">
+                <?= $this->render("admin/menu.phtml") ?>
+            </div>
+            <div class="row">
+                <?= $this->layout()->content; ?>
+                <?= $this->render("users/footer.phtml") ?>
+            </div>
+            <?= $this->headScript() ?>
+        </div>
+    </body>
+</html>

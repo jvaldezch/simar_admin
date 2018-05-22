@@ -1,0 +1,61 @@
+<form action="<?= $this->form->getAction() ?>" method="post" id="fiel">
+    <?= $this->form->idAgente ?>
+    <?= $this->form->password ?>
+    <?= $this->form->webservice ?>
+    <div class="form-group">
+        <label for="keyFile">ARCHIVO KEY:</label>
+        <input type="file" id="keyFile" name="keyFile">
+        <p class="help-block">Seleccionar el archivo .key</p>
+    </div>
+    <div class="form-group">
+        <label for="cerFile">ARCHIVO CER:</label>
+        <input type="file" id="cerFile" name="cerFile">
+        <p class="help-block">Seleccionar el archivo .cer</p>
+    </div>
+    <div class="form-group">
+        <label for="cifrado">CIFRADO DE SELLO:</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="cifrado" id="optionsRadios1" value="1" checked>
+                Normal
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="cifrado" id="optionsRadios2" value="2">
+                256 (Sellos 2015)
+            </label>
+        </div>
+    </div>
+    <button class="btn btn-primary pull-right" type="submit" id="submit">Agregar Sello</button>
+</form>
+<div class="row" style="margin-bottom: 5px"></div>
+<?php if(isset($this->data) && !empty($this->data)) { ?>
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Certificado</th>
+            <th>Creado</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->data as $item) { ?>
+        <tr>
+            <td><?= $item["archivoCer"] ?></td>
+            <td><?= $item["archivoKey"] ?></td>
+            <td><?= $item["creado"] ?></td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<?php } else { ?>
+<p class="bg-danger">
+    El agente no tiene sellos cargados en el sistema.
+</p>
+<?php } ?>
+<a class="btn btn-warning" href="/administrador/agentes/index" role="button">«&nbsp;Regresar</a>

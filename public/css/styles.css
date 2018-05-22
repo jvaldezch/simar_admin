@@ -1,0 +1,338 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 20, 2015, 6:00:59 PM
+    Author     : Jaime
+*/
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #1D2951;
+}
+
+p,
+label,
+input,
+button {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+}
+
+label {
+    letter-spacing: 1px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+    font-family: 'Ubuntu', sans-serif;
+    color: #fff;
+}
+.form-signin {
+    max-width: 330px;
+    padding: 14px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+    border: 1px solid #e5e5e5;
+    line-height: 16px;
+    padding: 4px;
+    vertical-align: top;
+}
+.table > thead > tr > th {
+    color: #fff;
+}
+table.table-narrow td {
+    margin: 0;
+    padding: 0;
+    line-height: 12px;
+    font-size: 12px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+table.dataTable thead th, 
+table.dataTable thead td {
+    padding: 3px 6px !important;
+    border-bottom: 1px solid #111;
+    font-size: 12px;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 3px 6px !important;
+    font-size: 12px;
+}
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+    color: #B0DFE5 !important;
+}
+
+footer {
+    color: #fff;
+}
+
+/*
+ul.errors {
+  margin: 0;
+  padding: 0;
+  padding-left: 10px;
+}
+ul.errors li {
+  margin: 0;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+  color: #c7254e;
+  font-size: 90%;
+  padding: 1px 2px;
+}
+ul.errors li {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.currency {
+  width: 100%;
+}
+.currency span {
+  float: left;
+}
+.currency .number {
+  float: right;
+}
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  border: 1px solid #e5e5e5;
+  line-height: 16px;
+  padding: 4px;
+  vertical-align: top;
+}
+table.table-narrow td {
+  margin: 0;
+  padding: 0;
+  line-height: 12px;
+  font-size: 12px;
+  font-family: 'open_sansregular';
+}
+@media (max-width: 600px) {
+  #cssmenu > ul {
+    width: 100%;
+  }
+  #cssmenu > ul li#responsive-tab {
+    display: block;
+  }
+  #cssmenu > ul li#responsive-tab a {
+    background: url('images/menu.png') no-repeat;
+    background-position: 95% -35%;
+  }
+  #cssmenu > ul li#responsive-tab a:hover {
+    background-color: #d80041;
+    background-position: 95% 135%;
+  }
+  #cssmenu > ul li {
+    display: none;
+  }
+  #cssmenu > ul li.right {
+    float: none;
+  }
+  #cssmenu > ul li.has-sub {
+    position: relative;
+  }
+  #cssmenu > ul li.has-sub ul {
+    display: block;
+    position: static;
+    width: 100%;
+    background: #ffffff;
+    border: 0 none;
+  }
+  #cssmenu > ul li.has-sub ul li {
+    display: block !important;
+  }
+  #cssmenu > ul li.has-sub ul li a span {
+    display: block;
+    padding-left: 24px;
+  }
+  #cssmenu > ul li.has-sub > a {
+    background-image: none;
+  }
+}
+
+@media (min-width: 600px) {
+  #cssmenu > ul > li.collapsed {
+    display: inline-block !important;
+    *display: inline;
+    zoom: 1;
+  }
+  #cssmenu > ul ul li.collapsed {
+    display: block !important;
+  }
+}
+.traffic-edocument {
+  background-color: #fff;
+}
+.traffic-edocument table {
+  width: 100%;
+  margin: 0;
+}
+.traffic-edocument table * {
+  font-size: 12px;
+}
+.traffic-edocument p,
+.traffic-edocument h4 {
+  background: none;
+  border: none;
+}
+.traffic-edocument p {
+  font-size: 12px;
+  padding: 3px 2px;
+  color: #333;
+}
+.traffic-edocument p strong {
+  color: #003399;
+}
+.traffic-edocument h4 {
+  font-size: 16px;
+  color: #003399;
+}
+.traffic-edocument table {
+  margin: 1px 0;
+}
+.traffic-edocument table,
+.traffic-edocument table td,
+.traffic-edocument table th {
+  background: none;
+  color: #333;
+  border: 0;
+}
+.traffic-edocument table td,
+.traffic-edocument table th {
+  padding: 3px 3px;
+}
+.traffic-edocument table th {
+  border-top: 1px #666 solid;
+  border-left: 1px #666 solid;
+  border-right: 1px #666 solid;
+  background: #dbdbdb;
+  background-color: #dbdbdb;
+}
+.traffic-edocument table td {
+  border-left: 1px #666 solid;
+  border-right: 1px #666 solid;
+}
+.traffic-edocument table tr:last-child {
+  border-bottom: 1px #666 solid;
+}
+.navbar-default {
+  background-color: #337ab7;
+  border-color: #1b5a90;
+}
+.navbar-default .navbar-brand {
+  color: #f9f9f9;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #c9dced;
+}
+.navbar-default .navbar-text {
+  color: #f9f9f9;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #f9f9f9;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #c9dced;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #c9dced;
+  background-color: #1b5a90;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #c9dced;
+  background-color: #1b5a90;
+}
+.navbar-default .navbar-toggle {
+  border-color: #1b5a90;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #1b5a90;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #f9f9f9;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #f9f9f9;
+}
+.navbar-default .navbar-link {
+  color: #f9f9f9;
+}
+.navbar-default .navbar-link:hover {
+  color: #c9dced;
+}
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #f9f9f9;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #c9dced;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #c9dced;
+    background-color: #1b5a90;
+  }
+}
+*/
+/*# sourceMappingURL=styles.css.map */
