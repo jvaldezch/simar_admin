@@ -5,7 +5,6 @@ class Default_IndexController extends Zend_Controller_Action {
     protected $_config;
     protected $_redirector;
     protected $_appConfig = null;
-    protected $_firephp;
 
     public function init() {
         $this->_appConfig = new Application_Model_ConfigMapper();
@@ -19,7 +18,6 @@ class Default_IndexController extends Zend_Controller_Action {
         $this->view->headScript()
                 ->appendFile("/js/jquery-1.11.1.min.js")
                 ->appendFile("/bootstrap/js/bootstrap.min.js");
-        require_once 'FirePHPCore/lib/FirePHP.class.php';
         $this->_firephp = FirePHP::getInstance(true);
     }
     
@@ -76,34 +74,6 @@ class Default_IndexController extends Zend_Controller_Action {
             $filename = "/home/vucem/5_part9.xml";
             file_put_contents($filename, base64_decode($t->getXml()));
         }
-//        $m = new Usuarios_Model_PedimentosMapper();
-//        $arr = array(
-//            "aduana" => 160,
-//            "patente" => 3574,
-//            "pedimento" => 5006792,
-//        );
-//        $t = new Usuarios_Model_Table_Pedimentos(array(
-//            "idCliente" => 1,
-//            "aduana" => $arr["aduana"],
-//            "patente" => $arr["patente"],
-//            "pedimento" => $arr["pedimento"],
-//        ));
-//        $m->find($t);
-//        if(null !== ($t->getId())) {
-//            $filename = "/home/vucem/{$arr["patente"]}_{$arr["aduana"]}_{$arr["pedimento"]}.xml";
-//            unlink($filename);
-//            file_put_contents($filename, base64_decode($t->getXml()));
-//            $misc = new Vucem_Misc();
-//            $array = $misc->vucemXmlToArray(base64_decode($t->getXml()));
-//            Zend_Debug::dump($array);
-////            header("Cache-Control: public");
-////            header("Content-Description: File Transfer");
-////            header("Content-Disposition: attachment; filename=" . pathinfo($filename, PATHINFO_BASENAME) . "");
-////            header("Content-length: " . filesize($filename));
-////            header("Content-Transfer-Encoding: binary");
-////            header("Content-Type: binary/octet-stream");
-////            readfile($filename);
-//        }
     }
 
     public function removeSessionsAction() {

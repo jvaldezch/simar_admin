@@ -3,14 +3,11 @@
 class Default_AuthController extends Zend_Controller_Action {
 
     protected $_config;
-    protected $_firephp;
     protected $_auth;
 
     public function init() {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-
-        require_once 'FirePHPCore/lib/FirePHP.class.php';
         $this->_firephp = FirePHP::getInstance(true);
         $this->_config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', APPLICATION_ENV);
     }

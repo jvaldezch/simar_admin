@@ -5,14 +5,12 @@ class Admin_IndexController extends Zend_Controller_Action {
     protected $_config;
     protected $_redirector;
     protected $_appconfig = null;
-    protected $_firephp;
     protected $_session;
 
     public function init() {
         $this->_helper->layout->setLayout("admin/layout");
         $this->_appconfig = new Application_Model_ConfigMapper();
         $this->_config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", APPLICATION_ENV);
-        require_once "FirePHPCore/lib/FirePHP.class.php";
         $this->_firephp = FirePHP::getInstance(true);
         $this->view->headMeta()->appendName("author", "");
         $this->view->headMeta()->appendName("description", "");

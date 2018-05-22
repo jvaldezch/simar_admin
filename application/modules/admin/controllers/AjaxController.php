@@ -3,13 +3,11 @@
 class Administrador_AjaxController extends Zend_Controller_Action {
 
     protected $_appconfig = null;
-    protected $_firephp;
     protected $_session;
 
     public function init() {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        require_once "FirePHPCore/lib/FirePHP.class.php";
         $this->_firephp = FirePHP::getInstance(true);
         $sesiones = new App_Sesiones(new Zend_Session_Namespace("AuthSessions"), $this->_appconfig);
         if ($sesiones->actualizar()) {
