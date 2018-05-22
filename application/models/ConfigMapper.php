@@ -10,31 +10,14 @@ class Application_Model_ConfigMapper {
 
     public function getParam($param) {
         try {
-            $select = $this->_db->select()
+            $sql = $this->_db->select()
                     ->from("config", array("value"))
-                    ->where("parameter = ?", $param);
-            $result = $this->_db->fetchRow($select, array());
-            if ($result) {
-                return $result["value"];
-            }
-            return false;
-        } catch (Zend_Db_Exception $ex) {
-            throw new Exception("DB Exception " . __METHOD__ . ": " . $ex->getMessage());
-        }
-    }
-
-    public function pageName($module, $controller, $action) {
-        try {
-            $select = $this->_db->select()
-                    ->from("paginas", array("descripcion"))
-                    ->where("modulo = ?", $module)
-                    ->where("controlador = ?", $controller)
-                    ->where("accion = ?", $action);
-            $stmt = $this->_db->fetchRow($select, array());
+                    ->where("param = ?", $param);
+            $stmt = $this->_db->fetchRow($sql, array());
             if ($stmt) {
-                return $stmt["descripcion"];
+                return $stmt["value"];
             }
-            return "---";
+            return;
         } catch (Zend_Db_Exception $ex) {
             throw new Exception("DB Exception " . __METHOD__ . ": " . $ex->getMessage());
         }

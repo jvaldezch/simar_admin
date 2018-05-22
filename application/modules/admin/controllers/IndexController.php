@@ -11,7 +11,6 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->_helper->layout->setLayout("admin/layout");
         $this->_appconfig = new Application_Model_ConfigMapper();
         $this->_config = new Zend_Config_Ini(APPLICATION_PATH . "/configs/application.ini", APPLICATION_ENV);
-        $this->_firephp = FirePHP::getInstance(true);
         $this->view->headMeta()->appendName("author", "");
         $this->view->headMeta()->appendName("description", "");
         $this->view->headLink()
