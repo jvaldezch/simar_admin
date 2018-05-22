@@ -18,7 +18,6 @@ class Default_IndexController extends Zend_Controller_Action {
         $this->view->headScript()
                 ->appendFile("/js/jquery-1.11.1.min.js")
                 ->appendFile("/bootstrap/js/bootstrap.min.js");
-        $this->_firephp = FirePHP::getInstance(true);
     }
     
     public function preDispatch() {
