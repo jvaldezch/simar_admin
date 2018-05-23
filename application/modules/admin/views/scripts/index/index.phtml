@@ -1,6 +1,8 @@
 <h4>Acervo de imágenes</h4>
 
 <div id="table-results" style="min-height: 400px">
+    <i class="fas fa-sync" style="color: white; float: right; margin: 0 5px; cursor: pointer" id="update" title="Actualizar"></i>
+    <i class="fas fa-table" style="color: white; float: right; margin: 0 5px; cursor: pointer" id="download-report" title="Descargar tabla en Excel"></i>
     <label>Elementos por página: </label>
     <select id="table-results-selector">
         <option value="25">25</option>
@@ -10,19 +12,28 @@
     <label>Tipo de producto: </label>
     <select id="table-results-type">
         <option value="">---</option>
-        <option value="day">NSST</option>
-        <option value="w-nsst">W-NSST</option>
-        <option value="m-nsst">M-NSST</option>
-        <option value="whs">WHS</option>
-        <option value="dhw">DHW</option>
-        <option value="sba">SBA</option>
+        <option value="day">GHRSST NSST</option>
+        <option value="w-nsst">SATmo W-NSST</option>
+        <option value="w-nsst-a">SATmo W-NSST-A</option>
+        <option value="w-nsst-c">SATmo W-NSST-C</option>
+        <option value="m-nsst">SATmo M-NSST</option>
+        <option value="m-nsst-a">SATmo M-NSST-A</option>
+        <option value="m-nsst-c">SATmo M-NSST-C</option>
+        <option value="wy-nsst">SATcoral WY-NSST</option>
+        <option value="whs">SATcoral WHS</option>
+        <option value="dhw">SATcoral DHW</option>
+        <option value="sba">SATcoral SBA</option>
+        <option value="noaa-m-nsst-c">NOAA M-NSST-C</option>
+        <option value="noaa-mxm-nsst-c">NOAA MxM-NSST-C</option>
     </select>
     <label>Año: </label>
     <select id="table-results-year">
         <option value="">---</option>
     </select>
+    <label>Inicio: </label> <input type="text" id="table-results-dateini" style="width: 80px" value="" />
+    <label>Fin: </label> <input type="text" id="table-results-dateend" style="width: 80px" value="" />
     <label>Buscar: </label> <input type="text" id="table-results-serach" />
-    <a href="javascript:void(0)" id="download-report" style="float: right">Descargar reporte</a>
+
     <br>
     <br>
     <table class="table table-striped table-bordered table-hover simar-table" id="results">

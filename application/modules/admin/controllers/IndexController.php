@@ -32,12 +32,17 @@ class Admin_IndexController extends Zend_Controller_Action {
     public function indexAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
         $this->view->headLink()
-                ->appendStylesheet("/datatables/jquery.dataTables.min.css")
-                ->appendStylesheet("/datatables/dataTables.bootstrap.min.css");
+                //->appendStylesheet("/datatables/jquery.dataTables.min.css")
+                //->appendStylesheet("/datatables/dataTables.bootstrap.min.css")
+                ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css")
+                ->appendStylesheet("/js/common/contentxmenu/jquery.contextMenu.min.css");;
         $this->view->headScript()
-                ->appendFile("/datatables/jquery.dataTables.min.js")
-                ->appendFile("/datatables/jquery.dataTables.init.js")
+                //->appendFile("/datatables/jquery.dataTables.min.js")
+                //->appendFile("/datatables/jquery.dataTables.init.js")
                 ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/locales/bootstrap-datepicker.es.min.js")
+                ->appendFile("/js/common/contentxmenu/jquery.contextMenu.min.js")
                 ->appendFile("/js/admin/index.js");
     }
 
