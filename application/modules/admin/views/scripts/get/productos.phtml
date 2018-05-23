@@ -1,0 +1,26 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <a href="/admin/index/ver-producto?rid=<?= $item["rid"] ?>"><?= $item["rid"] ?></a>
+            </td>
+            <td><?= $item["year"] ?></td>
+            <td><?= $item["month"] ?></td>
+            <td><?= $item["week"] ?></td>
+            <td><?= $item["day"] ?></td>
+            <td><?= $item["composition"] ?></td>
+            <td><?= $item["sensor"] ?></td>
+            <td><?= $item["product"] ?></td>
+            <td>
+                <a href="<?= str_replace($this->dataDir, $this->satmoDir, $item["path"]) ?>"><?= $item["filename"] ?></a>
+            </td>
+            <td><?= date("d/m/Y", strtotime($item["product_date"])) ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="8">
+            <em>No hay productos</em>
+        </td>
+    </tr>
+<?php } ?>

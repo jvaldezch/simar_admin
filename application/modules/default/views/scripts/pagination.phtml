@@ -1,41 +1,39 @@
-<nav>
-    <ul class="pagination pagination-sm">
-        <?php if (isset($this->previous)) { ?>
+<ul class="pagination pagination-sm">
+    <?php if (isset($this->previous)) { ?>
+        <li>
+            <a href="javascript:void(0)" onclick="tableProducts(<?= $this->previous ?>);" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    <?php } else { ?>
+        <li class="disabled">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    <?php } ?>
+    <?php foreach ($this->pagesInRange as $page) { ?>
+        <?php if ($page != $this->current) { ?>
             <li>
-                <a href="<?= $this->url(array('page' => $this->previous)) ?>" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
+                <a href="javascript:void(0)" onclick="tableProducts(<?= $page ?>);"><?= $page ?></a>
             </li>
         <?php } else { ?>
-            <li class="disabled">
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
+            <li class="active">
+                <a href="javascript:void(0)" onclick="tableProducts(<?= $page ?>);"><?= $page ?></a>
             </li>
         <?php } ?>
-        <?php foreach ($this->pagesInRange as $page) { ?>
-            <?php if ($page != $this->current) { ?>
-                <li>
-                    <a href="<?= $this->url(array('page' => $page)) ?>"><?= $page ?></a>
-                </li>
-            <?php } else { ?>
-                <li class="active">
-                    <a href="<?= $this->url(array('page' => $page)) ?>"><?= $page ?></a>
-                </li>
-            <?php } ?>
-        <?php } ?>
-        <?php if (isset($this->next)) { ?>
-            <li>
-                <a href="<?= $this->url(array('page' => $this->next)) ?>" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        <?php } else { ?>
-            <li class="disabled">
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        <?php } ?>
-    </ul>
-</nav>
+    <?php } ?>
+    <?php if (isset($this->next)) { ?>
+        <li>
+            <a href="javascript:void(0)" onclick="tableProducts(<?= $this->next ?>);" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    <?php } else { ?>
+        <li class="disabled">
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    <?php } ?>
+</ul>

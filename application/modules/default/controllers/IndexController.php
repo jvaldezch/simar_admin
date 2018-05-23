@@ -34,17 +34,13 @@ class Default_IndexController extends Zend_Controller_Action {
     public function indexAction() {
         $this->view->headLink()
                 ->appendStylesheet("/bootstrap/css/bootstrap.min.css")
-                ->appendStylesheet("/webfontkit/stylesheet.css")
-                ->appendStylesheet("/tooltipster/css/tooltipster.css")
-                ->appendStylesheet("/tooltipster/css/themes/tooltipster-light.css")
                 ->appendStylesheet("/css/styles.css");
         $this->view->headScript()
                 ->appendFile("/js/common/common.js")
                 ->appendFile("/js/common/jquery.form.min.js")
                 ->appendFile("/js/common/jquery.validate.min.js")
                 ->appendFile("/js/jquery-1.11.1.min.js")
-                ->appendFile("/bootstrap/js/bootstrap.min.js")
-                ->appendFile("/tooltipster/js/jquery.tooltipster.min.js");
+                ->appendFile("/bootstrap/js/bootstrap.min.js");
         try {
             $form = new Application_Form_Login();
             $username = $this->getRequest()->getCookie('myVucemUsr');
@@ -58,28 +54,6 @@ class Default_IndexController extends Zend_Controller_Action {
         } catch (Exception $ex) {
             throw new Exception($ex->getMessage());
         }
-    }
-
-    public function aboutAction() {
-        $this->_helper->layout()->disableLayout();
-        $this->_helper->viewRenderer->setNoRender(true);
-        $m = new Usuarios_Model_PedimentosPartidasMapper();
-        $t = new Usuarios_Model_Table_PedimentosPartidas(array(
-            "idPedimento" => 5,
-            "partida" => 9,
-        ));
-        $m->find($t);
-        if(null !== ($t->getId())) {
-            $filename = "/home/vucem/5_part9.xml";
-            file_put_contents($filename, base64_decode($t->getXml()));
-        }
-    }
-
-    public function removeSessionsAction() {
-        $this->_helper->layout()->disableLayout();
-        $this->_helper->viewRenderer->setNoRender(true);
-        $model = new Application_Model_Sesiones();
-        $model->removeExpired();
     }
 
 }
