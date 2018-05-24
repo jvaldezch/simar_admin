@@ -54,6 +54,52 @@
         //  .. White background
         var white = L.tileLayer("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEX///+nxBvIAAAAH0lEQVQYGe3BAQ0AAADCIPunfg43YAAAAAAAAAAA5wIhAAAB9aK9BAAAAABJRU5ErkJggg==");
 
+        var template =
+            "//map1{s}.vis.earthdata.nasa.gov/wmts-webmerc/" +
+            "{layer}/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.jpg";
+
+        var blueMarbel = L.tileLayer(template, {
+            layer: "BlueMarble_ShadedRelief",
+            tileMatrixSet: "GoogleMapsCompatible_Level8",
+            maxZoom: 9,
+            time: "2013-11-04",
+            tileSize: 256,
+            subdomains: "abc",
+            noWrap: true,
+            continuousWorld: true,
+            bounds: [
+                [-85.0511287776, -179.999999975],
+                [85.0511287776, 179.999999975]
+            ],
+            attribution:
+                "<a href='https://wiki.earthdata.nasa.gov/display/GIBS'>" +
+                "NASA EOSDIS GIBS</a>&nbsp;&nbsp;&nbsp;" +
+                "<a href='https://github.com/nasa-gibs/web-examples/blob/release/examples/leaflet/webmercator-epsg3857.js'>" +
+                "View Source" +
+                "</a>"
+        });
+
+        var coastLines = L.tileLayer(template, {
+            layer: "Coastlines",
+            tileMatrixSet: "GoogleMapsCompatible_Level12",
+            maxZoom: 9,
+            time: "2013-11-04",
+            tileSize: 256,
+            subdomains: "abc",
+            noWrap: true,
+            continuousWorld: true,
+            bounds: [
+                [-85.0511287776, -179.999999975],
+                [85.0511287776, 179.999999975]
+            ],
+            attribution:
+                "<a href='https://wiki.earthdata.nasa.gov/display/GIBS'>" +
+                "NASA EOSDIS GIBS</a>&nbsp;&nbsp;&nbsp;" +
+                "<a href='https://github.com/nasa-gibs/web-examples/blob/release/examples/leaflet/webmercator-epsg3857.js'>" +
+                "View Source" +
+                "</a>"
+        });
+
         var lyr = L.tileLayer('<?= $this->url ?>', 
             {tms: false, opacity: 1, attribution: ""
         });
@@ -67,7 +113,7 @@
             layers: [osm]
         });
 
-        var basemaps = {"OpenStreetMap": osm, "CartoDB Positron": cartodb, "Stamen Toner": toner, "Without background": white}
+        var basemaps = {"OpenStreetMap": osm, "CartoDB Positron": cartodb, "Stamen Toner": toner, "Without background": white, "GIBS Blue Marbel": blueMarbel, "GIBS Coastlines": coastLines}
         var overlaymaps = {
             "<?= $this->layerName ?>": lyr,
         }
