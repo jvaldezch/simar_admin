@@ -79,26 +79,12 @@
                 "</a>"
         });
 
-        var coastLines = L.tileLayer(template, {
-            layer: "Coastlines",
-            tileMatrixSet: "GoogleMapsCompatible_Level12",
-            maxZoom: 9,
-            time: "2013-11-04",
-            tileSize: 256,
-            subdomains: "abc",
-            noWrap: true,
-            continuousWorld: true,
-            bounds: [
-                [-85.0511287776, -179.999999975],
-                [85.0511287776, 179.999999975]
-            ],
-            attribution:
-                "<a href='https://wiki.earthdata.nasa.gov/display/GIBS'>" +
-                "NASA EOSDIS GIBS</a>&nbsp;&nbsp;&nbsp;" +
-                "<a href='https://github.com/nasa-gibs/web-examples/blob/release/examples/leaflet/webmercator-epsg3857.js'>" +
-                "View Source" +
-                "</a>"
+        var asterAttr = 'ASTER GDEM is a product of <a href="http://www.meti.go.jp/english/press/data/20090626_03.html" target="_blank">METI</a> and <a>href="https://lpdaac.usgs.gov/products/aster_policies" target="_blank">NASA</a>'; 
+
+        var osmRoads = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+            maxZoom: 18,
         });
+
 
         var lyr = L.tileLayer('<?= $this->url ?>', 
             {tms: false, opacity: 1, attribution: ""
@@ -113,7 +99,7 @@
             layers: [osm]
         });
 
-        var basemaps = {"OpenStreetMap": osm, "CartoDB Positron": cartodb, "Stamen Toner": toner, "Without background": white, "GIBS Blue Marbel": blueMarbel, "GIBS Coastlines": coastLines}
+        var basemaps = {"OpenStreetMap": osm, "CartoDB Positron": cartodb, "Stamen Toner": toner, "Without background": white, "GIBS Blue Marbel": blueMarbel, "OSM roads": osmRoads}
         var overlaymaps = {
             "<?= $this->layerName ?>": lyr,
         }
