@@ -29,7 +29,7 @@ window.verProducto = function (rid) {
                 $("#x_max").val(res.results.x_max);
                 $("#y_max").val(res.results.y_max);
 
-                $("#thumbnail").attr('src', res.results.url + "&mode=map&layer=raster");
+                //$("#thumbnail").attr('src', res.results.url + "&mode=map&layer=raster");
                 $("#downloadlink").attr('href', res.results.download)
                     .show();
                 $("#viewOnMap").attr('href', '/admin/index/ver-mapa?rid=' + rid)

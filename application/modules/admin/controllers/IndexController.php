@@ -48,6 +48,29 @@ class Admin_IndexController extends Zend_Controller_Action {
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/common/common.js")
                 ->appendFile("/js/admin/ver-producto.js");
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "rid" => array("Digits"),
+        );
+        $v = array(
+                "rid" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("rid")) {
+                $mppr = new Admin_Model_SatmoNcRs();
+                $arr = $mppr->obtenerProducto($input->rid);
+                if (isset($arr)) {
+                        $composition = $arr["composition"] = 'day' ? 'nsst' : $arr["compostion"];
+                        $url = "http://35.196.161.155:8085/tiles/satmo/" . $arr["sensor"] . "/" . $composition . "/" . date("Y-m-d", strtotime($arr["product_date"])) . "/wmts/nsst/webmercator/{z}/{x}/{y}.png";
+                        $this->view->url = $url;
+                        $this->view->layerName = strtoupper($arr["sensor"]) . " " . date("Y-m-d", strtotime($arr["product_date"]));
+                        $this->view->xMin = $arr["x_min"];
+                        $this->view->yMin = $arr["y_min"];
+                        $this->view->xMax = $arr["x_max"];
+                        $this->view->yMax = $arr["y_max"];
+                        $this->view->filename = $arr["filename"];
+                }
+        }
     }
 
     public function categoriasAction() {
