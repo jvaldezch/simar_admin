@@ -25,6 +25,18 @@ class Admin_Model_SatmoNc {
         }
     }
 
+    public function buscar($search) {
+        try {
+            $sql = $this->_db_table->select()
+                    ->from($this->_db_table, array('*'))
+                    ->where("filename LIKE ?", "%" . $search . "%")
+                    ->order("product_date DESC");
+            return $sql;
+        } catch (Zend_Db_Exception $ex) {
+            throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
+        }
+    }
+
     public function obtenerAnios() {
         try {
             $sql = $this->_db_table->select()
