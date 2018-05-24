@@ -15,7 +15,7 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->headMeta()->appendName("description", "");
         $this->view->headLink()
                 ->appendStylesheet("/bootstrap/css/bootstrap.min.css")
-                ->appendStylesheet("/css/styles.css");
+                ->appendStylesheet("/css/styles.css?" . time());
         $this->view->headScript()
                 ->appendFile("/js/jquery-1.11.1.min.js")
                 ->appendFile("/bootstrap/js/bootstrap.min.js");
