@@ -32,6 +32,8 @@ window.verProducto = function (rid) {
                 $("#thumbnail").attr('src', res.results.url + "&mode=map&layer=raster");
                 $("#downloadlink").attr('href', res.results.download)
                     .show();
+                $("#viewOnMap").attr('href', '/admin/index/ver-mapa?rid=' + rid)
+                    .show();
             }
         }
     });
