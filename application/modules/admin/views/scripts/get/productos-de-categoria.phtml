@@ -1,0 +1,18 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>"><?= $item["id"] ?></a>
+            </td>
+            <td><?= $item["spanish_title"] ?></td>
+            <td><?= $item["composition"] ?></td>
+            <td><?= date("d/m/Y", strtotime($item["created_at"])) ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="3">
+            <em>No hay categorias</em>
+        </td>
+    </tr>
+<?php } ?>

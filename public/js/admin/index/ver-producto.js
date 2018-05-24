@@ -34,10 +34,30 @@ window.verProducto = function (rid) {
                     .show();
                 $("#viewOnMap").attr('href', '/admin/index/ver-mapa?rid=' + rid)
                     .show();
+                obtenerMetadata(res.results.composition);
             }
         }
     });
 };
+
+window.obtenerMetadata = function (composition) {
+    var comp;
+    if (composition == 'day') {
+        comp = 'nsst';
+    } else {
+        comp = composition;
+    }
+    return $.ajax({
+        url: '/admin/get/obtener-metadata',
+        data: { composition: comp },
+        success: function (res) {
+            if (res.success === true) {
+                $(".metadata").html(res.html)
+                .show();
+            }
+        }
+    });
+}
 
 
 $(document).ready(function () {

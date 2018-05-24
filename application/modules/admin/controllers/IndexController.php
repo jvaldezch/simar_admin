@@ -39,7 +39,7 @@ class Admin_IndexController extends Zend_Controller_Action {
                 ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
                 ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/locales/bootstrap-datepicker.es.min.js")
                 ->appendFile("/js/common/contentxmenu/jquery.contextMenu.min.js")
-                ->appendFile("/js/admin/index.js");
+                ->appendFile("/js/admin/index/index.js");
     }
 
     public function verProductoAction() {
@@ -47,7 +47,7 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/common/common.js")
-                ->appendFile("/js/admin/ver-producto.js");
+                ->appendFile("/js/admin/index/ver-producto.js");
         $f = array(
                 "*" => array("StringTrim", "StripTags"),
                 "rid" => array("Digits"),
@@ -77,7 +77,36 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/common/common.js");
+                ->appendFile("/js/common/common.js")
+                ->appendFile("/js/admin/index/categorias.js");
+    }
+
+    public function verCategoriaAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Ver categoría";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/common/common.js")
+                ->appendFile("/js/admin/index/ver-categoria.js");
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+                $mppr = new Admin_Model_Categories();
+                $arr = $mppr->obtenerCategoria($input->id);
+                if (isset($arr)) {
+                        $this->view->id = $input->id;
+                        $this->view->name = $arr["name"];
+                        $this->view->abbreviation = $arr["abbreviation"];
+                        $this->view->english_name = $arr["english_name"];
+                        $this->view->main_name = $arr["main_name"];
+                        $this->view->order = $arr["order"];
+                }
+        }
     }
 
     public function poligonalesAction() {

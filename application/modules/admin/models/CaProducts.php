@@ -8,4 +8,31 @@ class Admin_Model_CaProducts {
         $this->_db_table = new Admin_Model_DbTable_CaProducts();
     }
 
+    public function productosDeCaterogia($id) {
+        try {
+            $sql = $this->_db_table->select()
+                    ->from($this->_db_table, array('*'))
+                    ->where("category_id = ?", $id)
+                    ->order("spanish_title ASC");
+            return $sql;
+        } catch (Zend_Db_Exception $ex) {
+            throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
+        }
+    }
+
+    public function obtener($composition) {
+        try {
+            $sql = $this->_db_table->select()
+                    ->from($this->_db_table, array('*'))
+                    ->where("composition = ?", $composition);
+            $stmt = $this->_db_table->fetchRow($sql);
+            if ($stmt) {
+                return $stmt->toArray();
+            }
+            return;
+        } catch (Zend_Db_Exception $ex) {
+            throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
+        }
+    }
+
 }

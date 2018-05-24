@@ -1,0 +1,76 @@
+<h4><strong>Categoría</strong>: <?= $this->name ?></h4>
+
+<form id="form">
+    <input type="hidden" id="id" name="id" value="<?= $this->id ?>" />
+    <table class="table table-striped table-bordered table-hover simar-table">
+        <thead>
+            <tr>
+                <th style="width: 200px">Parámetro</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Nombre:</td>
+                <td><input id="name" name="name" style="width: 550px" value="<?= $this->name ?>" /></td>
+            </tr>
+            <tr>
+                <td>Abreviación:</td>
+                <td><input id="abbreviation" name="abbreviation" style="width: 550px" value="<?= $this->abbreviation ?>" /></td>
+            </tr>
+            <tr>
+                <td>Nombre principal:</td>
+                <td><input id="main_name" name="main_name" style="width: 550px" value="<?= $this->main_name ?>" /></td>
+            </tr>
+            <tr>
+                <td>Nombre inglés:</td>
+                <td><input id="english_name" name="english_name" style="width: 550px" value="<?= $this->english_name ?>" /></td>
+            </tr>
+            <tr>
+                <td>Orden:</td>
+                <td><input id="order" name="order" style="width: 550px" value="<?= $this->order ?>" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" id="submit" style="float: right">
+                        <i class="far fa-save"></i> Guardar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<h4>Productos</h4>
+
+<div id="table-results" style="min-height: 400px">
+    <i class="fas fa-sync" style="color: white; float: right; margin: 0 5px; cursor: pointer" id="update" title="Actualizar"></i>
+    <i class="fas fa-table" style="color: white; float: right; margin: 0 5px; cursor: pointer" id="download-report" title="Descargar tabla en Excel"></i>
+    <label>Elementos por página: </label>
+    <select id="table-results-selector">
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+    <div>
+        <label>Buscar: </label> <input type="text" id="table-results-search" style="width: 250px"/><button id="search">Buscar</button>
+    </div>
+    <br>
+    <br>
+    <table class="table table-striped table-bordered table-hover simar-table" id="results">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Composición</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div id="table-results-info"></div>
+    <div id="table-results-paginator"></div>
+</div>
+
+<a class="btn btn-success" href="/admin/index/categorias">Regresar</a>
