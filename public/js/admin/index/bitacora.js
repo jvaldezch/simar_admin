@@ -42,4 +42,8 @@ $(document).ready(function () {
         tableProducts();
     });
 
+    $(document.body).on('change', '#table-results-selector', function () {
+        tableProducts();
+    });
+
 });
