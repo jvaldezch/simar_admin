@@ -1,3 +1,25 @@
-<p>
-    en construcción
-</p>
+<h4>Bitacora</h4>
+
+<div id="table-results" style="min-height: 400px">
+    <i class="fas fa-sync" style="color: white; float: right; margin: 0 5px; cursor: pointer" id="update" title="Actualizar"></i>
+    <i class="fas fa-table" style="color: white; float: right; margin: 0 5px; cursor: pointer" id="download-report" title="Descargar tabla en Excel"></i>
+    <label>Elementos por página: </label>
+    <select id="table-results-selector">
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+    <br>
+    <br>
+    <table class="table table-striped table-bordered table-hover simar-table" id="results">
+        <thead>
+            <tr>
+                <th>Archivo</th>
+                <th style="width: 200px">Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<textarea id="content" style="width: 100%; height: 300px"></textarea>

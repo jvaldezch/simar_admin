@@ -121,7 +121,8 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/common/common.js");   
+                ->appendFile("/js/common/common.js")
+                ->appendFile("/js/admin/index/bitacora.js");   
     }
 
     public function verMapaAction() {

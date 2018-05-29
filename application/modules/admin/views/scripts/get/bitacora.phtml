@@ -1,0 +1,16 @@
+<?php if (isset($this->files)) { ?>
+    <?php foreach ($this->files as $item) { ?>
+        <tr>
+            <td>
+                <a href="javascript:void(0)" onclick="archivoBitacora('<?= $item["filename"] ?>');"><?= $item["filename"] ?></a>
+            </td>
+            <td><?= date("D d/m/Y", $item["fecha"]) ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="3">
+            <em>No hay bitacora</em>
+        </td>
+    </tr>
+<?php } ?>
