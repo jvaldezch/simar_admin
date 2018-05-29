@@ -1,7 +1,10 @@
-window.tableProducts = function () {
+window.tableProducts = function (size) {
+    if (size === undefined) {
+        size = $("#table-results-selector").val();
+    }
     return $.ajax({
         url: '/admin/get/categorias',
-        data: {  },
+        data: { size: size },
         beforeSend: function (res) {
             $("#table-results").LoadingOverlay("show", { color: "rgba(255, 255, 255, 0.9)" });
         },

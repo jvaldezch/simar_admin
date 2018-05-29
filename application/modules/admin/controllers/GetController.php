@@ -336,15 +336,12 @@ class Admin_GetController extends Zend_Controller_Action {
 
             $f = array(
                 "*" => array("StringTrim", "StripTags"),
-                "page" => array("Digits"),
                 "size" => array("Digits"),
             );
             $v = array(
-                "page" => array(new Zend_Validate_Int(), "default" => 1),
-                "size" => array(new Zend_Validate_Int(), "default" => 20),
+                "size" => array(new Zend_Validate_Int(), "default" => 5),
             );
             $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
-
             if (APPLICATION_ENV == "production") {
                 $directory = $this->_appConfig->getParam("log_files");
             } else {
@@ -352,12 +349,17 @@ class Admin_GetController extends Zend_Controller_Action {
             }
             $files = array();
             $dir = new DirectoryIterator($directory);
+            $i = 0;
             foreach ($dir as $fileinfo) {
                 if ($fileinfo->getFilename() != '.' && $fileinfo->getFilename() != '..') {
                     $files[$fileinfo->getMTime()] = array(
                         "filename" => $fileinfo->getFilename(),
                         "fecha" => $fileinfo->getMTime(),
                     );
+                    $i++;
+                    if ($i == $input->size) {
+                        break;
+                    }
                 }
             }
             krsort($files);
