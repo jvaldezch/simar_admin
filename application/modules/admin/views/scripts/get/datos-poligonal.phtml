@@ -1,0 +1,29 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <?= $item["gid"] ?>
+            </td>
+            <td><?= $item["year"] ?></td>
+            <td><?= $item["week"] ?></td>
+            <td><?= $item["c1"] ?></td>
+            <td><?= $item["c2"] ?></td>
+            <td><?= $item["c3"] ?></td>
+            <td><?= $item["c4"] ?></td>
+            <td><?= $item["c5"] ?></td>
+            <td><?= $item["c1_per"] ?></td>
+            <td><?= $item["c2_per"] ?></td>
+            <td><?= $item["c3_per"] ?></td>
+            <td><?= $item["c4_per"] ?></td>
+            <td><?= $item["c5_per"] ?></td>
+            <td><?= $item["total"] ?></td>
+            <td><?= $this->nivelAlerta($item["level"]) ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="3">
+            <em>No hay categorias</em>
+        </td>
+    </tr>
+<?php } ?>

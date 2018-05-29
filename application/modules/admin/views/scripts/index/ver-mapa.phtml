@@ -10,6 +10,7 @@
         <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
         <script src="https://rawgithub.com/mylen/leaflet.TileLayer.WMTS/master/leaflet-tilelayer-wmts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="/js/common/leaflet-wfst.src.js"></script>
 
         <style>
             body { margin:0; padding:0; }
@@ -98,10 +99,59 @@
             layers: [osm]
         });
 
+        var owsrootUrl = 'http://35.196.161.155:8085/cgi-bin/mapserv';
+ 
+        var defaultParameters = {
+            map: '/mnt/arrakis/data/vectors/poligonales.map',
+            service: 'WFS',
+            version: '1.0.0',
+            request: 'GetFeature',
+            typeName: 'anp_regiones',
+            outputFormat: 'geojson',
+            //filter: '<Filter><PropertyIsEqualTo><PropertyName>gid</PropertyName><Literal>2</Literal></PropertyIsEqualTo></Filter>',
+        };
+        var parameters = L.Util.extend(defaultParameters);
+        var URL = owsrootUrl + L.Util.getParamString(parameters);
+
+        var poligonales = new L.geoJson(null, {
+            style: {"color": "#2ECCFA", "weight":2},
+            onEachFeature: function(feature, layer){
+                layer.bindPopup("You clicked on " + feature.properties.gid);
+            }
+        });
+        poligonales.addTo(map);
+
+        $.ajax({
+            dataType: "json",
+            url: URL,
+            success: function(data) {
+                $(data.features).each(function(key, data) {
+                    poligonales.addData(data);
+                });
+        }
+        }).error(function() {});
+
         var basemaps = {"OpenStreetMap": osm, "CartoDB Positron": cartodb, "Stamen Toner": toner, "Without background": white, "GIBS Blue Marbel": blueMarbel, "OSM roads": osmRoads}
         var overlaymaps = {
             "<?= $this->layerName ?>": lyr,
+            "Poligonales": poligonales,
         }
+
+        /*var boundaries = new L.WFS({
+            url: 'http://35.196.161.155:8085/cgi-bin/mapserv?map=/mnt/arrakis/data/vectors/poligonales.map',
+            //typeNS: 'topp',
+            typeName: 'anp_regiones',
+            //crs: L.CRS.EPSG4326,
+            geometryField: 'geom',
+            style: {
+                color: 'blue',
+                weight: 2
+            }
+        }, new L.Format.GeoJSON({crs: L.CRS.EPSG4326}))
+            .addTo(map)
+            .once('load', function () {
+            map.fitBounds(boundaries);
+        });*/
 
         // Title
         var title = L.control();

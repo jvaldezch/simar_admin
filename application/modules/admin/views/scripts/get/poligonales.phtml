@@ -1,0 +1,17 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <a href="/admin/index/ver-poligonal?id=<?= $item["gid"] ?>"><?= $item["gid"] ?></a>
+            </td>
+            <td><?= $item["region"] ?></td>
+            <td><?= $item["anp"] ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="3">
+            <em>No hay categorias</em>
+        </td>
+    </tr>
+<?php } ?>

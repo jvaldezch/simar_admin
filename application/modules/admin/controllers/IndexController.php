@@ -110,10 +110,11 @@ class Admin_IndexController extends Zend_Controller_Action {
     }
 
     public function poligonalesAction() {
-        $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
+        $this->view->title = $this->_appConfig->getParam("title") . " | ANP regionales";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/common/common.js");
+                ->appendFile("/js/common/common.js")
+                ->appendFile("/js/admin/index/poligonales.js");
     }
 
     public function bitacoraAction() {
@@ -147,6 +148,34 @@ class Admin_IndexController extends Zend_Controller_Action {
                         $this->view->yMax = $arr["y_max"];
                         $this->view->filename = $arr["filename"];
                 }
+        }
+    }
+
+    public function verPoligonalAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Ver categoría";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/common/common.js")
+                ->appendFile("/js/admin/index/ver-poligonal.js");
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+                /*$mppr = new Admin_Model_Categories();
+                $arr = $mppr->obtenerCategoria($input->id);
+                if (isset($arr)) {
+                        $this->view->id = $input->id;
+                        $this->view->name = $arr["name"];
+                        $this->view->abbreviation = $arr["abbreviation"];
+                        $this->view->english_name = $arr["english_name"];
+                        $this->view->main_name = $arr["main_name"];
+                        $this->view->order = $arr["order"];
+                }*/
         }
     }
 
