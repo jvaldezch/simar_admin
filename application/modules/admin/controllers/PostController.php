@@ -1,6 +1,6 @@
 <?php
 
-class Administrador_PostController extends Zend_Controller_Action {
+class Admin_PostController extends Zend_Controller_Action {
 
     protected $_appconfig = null;
     protected $_session;
@@ -9,37 +9,68 @@ class Administrador_PostController extends Zend_Controller_Action {
     public function init() {
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
-        $sesiones = new App_Sesiones(new Zend_Session_Namespace("AuthSessions"), $this->_appconfig);
-        if ($sesiones->actualizar()) {
-            $this->view->menus = $sesiones->permisos($this->getRequest()->getModuleName(), $this->getRequest()->getControllerName(), $this->getRequest()->getActionName());
-        } else {
-            $this->_redirect("/default/auth/logout");
-        }
     }
 
     public function preDispatch() {
-        parent::preDispatch();
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $this->_postData = $request->getPost();
-        } else {
-            throw new Zend_Controller_Request_Exception("Not post requested.");
+
+    }
+
+    public function guardarProductoDeCategoriaAction() {
+        try {
+            $r = $this->getRequest();
+            if ($r->isPost()) {
+                $f = array(
+                    "*" => array("StringTrim"),
+                    "id" => "Digits",
+                );
+                $v = array(
+                    "id" => array("NotEmpty", new Zend_Validate_Int()),
+                    "content" => array("NotEmpty"),
+                );
+                $input = new Zend_Filter_Input($f, $v, $r->getPost());
+                if ($input->isValid("id") && $input->isValid("content")) {
+
+                    $mppr = new Admin_Model_CaProducts();
+
+                    $arr = array('description' => html_entity_decode($input->content), 'updated_at' => date('Y-m-d H:i:s'));
+                    if ($mppr->actualizarProductoDeCaterogia($input->id, $arr)) {
+                        $this->_helper->json(array("success" => true));
+                    }
+                    $this->_helper->json(array("success" => false));
+
+                } else {
+                    throw new Exception("Invalid input!");
+                }
+            } else {
+                throw new Exception("Invalid request type!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
         }
     }
 
-    public function asignarAduanaAction() {
-        $form = $form = new Administrador_Form_AduanasAgente();
-        if ($form->isValid($this->_postData)) {
-            $input = $form->getValues();
-            $mdl = new Administrador_Model_AduanasAgente();
-            if (!($mdl->verificar($input["idAgente"], $input["idAduana"]))) {
-                $insert = $mdl->agregar($input["idAgente"], $input["idAduana"]);
-                if ($insert === true) {
-                    $this->_redirect("/administrador/agentes/aduanas?id=" . $input["idAgente"]);
+    public function guardarParametrosProductoDeCategoriaAction() {
+        try {
+            $r = $this->getRequest();
+            if ($r->isPost()) {
+                $f = array(
+                    "*" => array("StringTrim"),
+                    "id" => "Digits",
+                );
+                $v = array(
+                    "id" => array("NotEmpty", new Zend_Validate_Int()),
+                );
+                $input = new Zend_Filter_Input($f, $v, $r->getPost());
+                if ($input->isValid("id")) {
+                    $this->_helper->json(array("success" => true));
+                } else {
+                    throw new Exception("Invalid input!");
                 }
+            } else {
+                throw new Exception("Invalid request type!");
             }
-        } else {
-            $this->_redirect("/administrador/agentes/aduanas?id=" . $input->idAgente);
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
         }
     }
 

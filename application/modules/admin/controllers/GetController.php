@@ -398,4 +398,34 @@ class Admin_GetController extends Zend_Controller_Action {
         }
     }
 
+    public function obtenerProductoDeCategoriaAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+            );
+            $v = array(
+                "id" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("id")) {
+
+                $dataDir = $this->_appConfig->getParam("opendap_dir");
+                $satmoDir = $this->_appConfig->getParam("satmo_url"); 
+
+                $mppr = new Admin_Model_CaProducts();
+                $row = $mppr->productoDeCaterogia($input->id);
+                $arr = array();
+                if (!empty($row)) {
+                    $arr = $row;
+                }
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
 }

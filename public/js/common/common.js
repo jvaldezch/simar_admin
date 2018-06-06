@@ -38,3 +38,7 @@ function getAllUrlParams(url) {
 
     return obj;
 }
+
+window.goBack = function() {
+    window.history.back();
+};

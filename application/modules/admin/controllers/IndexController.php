@@ -167,16 +167,85 @@ class Admin_IndexController extends Zend_Controller_Action {
         );
         $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
         if ($input->isValid("id")) {
-                /*$mppr = new Admin_Model_Categories();
-                $arr = $mppr->obtenerCategoria($input->id);
-                if (isset($arr)) {
-                        $this->view->id = $input->id;
-                        $this->view->name = $arr["name"];
-                        $this->view->abbreviation = $arr["abbreviation"];
-                        $this->view->english_name = $arr["english_name"];
-                        $this->view->main_name = $arr["main_name"];
-                        $this->view->order = $arr["order"];
-                }*/
+        }
+    }
+
+    public function verProductoDeCategoriaAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Ver producto de categoría";
+        $this->view->headLink()
+                ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css")
+                ->appendStylesheet("/js/common/froala/css/froala_editor.css")
+                ->appendStylesheet("/js/common/froala/css/froala_style.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/code_view.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/draggable.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/colors.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/emoticons.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/image_manager.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/image.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/line_breaker.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/table.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/char_counter.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/video.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/fullscreen.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/file.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/quick_insert.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/help.css")
+                ->appendStylesheet("/js/common/froala/css/third_party/spell_checker.css")
+                ->appendStylesheet("/js/common/froala/css/plugins/special_characters.css")
+                ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css")
+                ->appendStylesheet("/js/common/confirm/jquery-confirm.min.css");
+        $this->view->headScript()
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js")
+                ->appendFile("/js/common/froala/js/froala_editor.min.js")
+                ->appendFile("/js/common/froala/js/plugins/align.min.js")
+                ->appendFile("/js/common/froala/js/plugins/char_counter.min.js")
+                ->appendFile("/js/common/froala/js/plugins/code_beautifier.min.js")
+                ->appendFile("/js/common/froala/js/plugins/code_view.min.js")
+                ->appendFile("/js/common/froala/js/plugins/colors.min.js")
+                ->appendFile("/js/common/froala/js/plugins/draggable.min.js")
+                ->appendFile("/js/common/froala/js/plugins/emoticons.min.js")
+                ->appendFile("/js/common/froala/js/plugins/entities.min.js")
+                ->appendFile("/js/common/froala/js/plugins/file.min.js")
+                ->appendFile("/js/common/froala/js/plugins/font_size.min.js")
+                ->appendFile("/js/common/froala/js/plugins/font_family.min.js")
+                ->appendFile("/js/common/froala/js/plugins/fullscreen.min.js")
+                ->appendFile("/js/common/froala/js/plugins/image.min.js")
+                ->appendFile("/js/common/froala/js/plugins/image_manager.min.js")
+                ->appendFile("/js/common/froala/js/plugins/line_breaker.min.js")
+                ->appendFile("/js/common/froala/js/plugins/inline_style.min.js")
+                ->appendFile("/js/common/froala/js/plugins/link.min.js")
+                ->appendFile("/js/common/froala/js/plugins/lists.min.js")
+                ->appendFile("/js/common/froala/js/plugins/paragraph_format.min.js")
+                ->appendFile("/js/common/froala/js/plugins/paragraph_style.min.js")
+                ->appendFile("/js/common/froala/js/plugins/quick_insert.min.js")
+                ->appendFile("/js/common/froala/js/plugins/quote.min.js")
+                ->appendFile("/js/common/froala/js/plugins/table.min.js")
+                ->appendFile("/js/common/froala/js/plugins/save.min.js")
+                ->appendFile("/js/common/froala/js/plugins/url.min.js")
+                ->appendFile("/js/common/froala/js/plugins/video.min.js")
+                ->appendFile("/js/common/froala/js/plugins/help.min.js")
+                ->appendFile("/js/common/froala/js/plugins/print.min.js")
+                ->appendFile("/js/common/froala/js/third_party/spell_checker.min.js")
+                ->appendFile("/js/common/froala/js/plugins/special_characters.min.js")
+                ->appendFile("/js/common/froala/js/plugins/word_paste.min.js")
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/common/common.js")
+                ->appendFile("/js/common/jquery.form.min.js")
+                ->appendFile("/js/common/jquery.validate.min.js")
+                ->appendFile("/js/common/confirm/jquery-confirm.min.js")
+                ->appendFile("/js/admin/index/ver-producto-de-categoria.js");
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+                $this->view->id = $input->id;
         }
     }
 

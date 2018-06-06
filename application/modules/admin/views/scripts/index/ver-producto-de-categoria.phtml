@@ -1,0 +1,60 @@
+<style>
+    #edit p {
+        color: #333;
+    }
+</style>
+<h4><strong>Producto de categoría</strong></h4>
+
+<form id="form">
+    <input type="hidden" id="id" name="id" value="<?= $this->id ?>" />
+    <table class="table table-striped table-bordered table-hover simar-table">
+        <thead>
+            <tr>
+                <th style="width: 200px">Parámetro</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Composición:</td>
+                <td><input id="composition" name="composition" style="width: 550px" /></td>
+            </tr>
+            <tr>
+                <td>Titulo español:</td>
+                <td><input id="spanish_title" name="spanish_title" style="width: 550px" /></td>
+            </tr>
+            <tr>
+                <td>Titulo inglés:</td>
+                <td><input id="title" name="title" style="width: 550px" /></td>
+            </tr>
+            <tr>
+                <td>Subtitulo:</td>
+                <td><input id="subtitle" name="subtitle" style="width: 550px" /></td>
+            </tr>
+            <tr>
+                <td>Miniatura:</td>
+                <td><input id="thumb_image" name="thumb_image" style="width: 550px" /></td>
+            </tr>
+            <tr>
+                <td>Unidades de medida:</td>
+                <td><input id="color_ramp_unit" name="color_ramp_unit" style="width: 550px" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" id="submit" style="float: right">
+                        <i class="far fa-save"></i> Guardar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<div id="editor" style="min-height: 250px">
+
+    <div id='edit' style="margin-top: 30px; min-height: 250px"></div>
+    <br>
+    
+</div>
+<button class="btn btn-primary pull-right" id="saveButton">Guardar</button>
+<a class="btn btn-success" href="javascript:void(0)" onclick="goBack()">Regresar</a>
+
