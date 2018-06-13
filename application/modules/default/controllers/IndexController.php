@@ -16,7 +16,8 @@ class Default_IndexController extends Zend_Controller_Action {
                 ->appendStylesheet('/css/styles.css');
         $this->view->headScript()
                 ->appendFile("/js/jquery-1.11.1.min.js")
-                ->appendFile("/bootstrap/js/bootstrap.min.js");
+                ->appendFile("/bootstrap/js/bootstrap.min.js")
+                ->appendFile("/js/common/common.js?" . time());
     }
     
     public function preDispatch() {
@@ -35,7 +36,6 @@ class Default_IndexController extends Zend_Controller_Action {
             ->appendFile("/js/common/jquery.form.min.js")
             ->appendFile("/js/common/jquery.validate.min.js")
             ->appendFile("/js/common/tooltipster/js/tooltipster.bundle.min.js")
-            ->appendFile("/js/common/common.js")
             ->appendFile("/js/default/index/index.js");
         try {
             $form = new Application_Form_Login();

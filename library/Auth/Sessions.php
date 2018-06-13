@@ -74,7 +74,7 @@ class Auth_Sessions {
 
     public function autorizar() {
         if ($this->username == 'admin') {
-            if ($this->password == 'admin') {
+            if ($this->password == 'admin20') {
 
                 $this->_iniciarSesion();
 

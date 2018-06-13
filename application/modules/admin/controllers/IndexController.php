@@ -19,7 +19,7 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->headScript()
                 ->appendFile("/js/jquery-1.11.1.min.js")
                 ->appendFile("/bootstrap/js/bootstrap.min.js")
-                ->appendFile("/js/common/common.js");
+                ->appendFile("/js/common/common.js?" . time());
     }
 
     public function preDispatch() {
