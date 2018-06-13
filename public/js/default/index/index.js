@@ -1,9 +1,13 @@
+var tooltip;
+
 $(document).ready(function () {
 
     $("#formLogin").validate({
         errorPlacement: function (error, element) {
-            $(element).tooltipster('update', $(error).text());
-            $(element).tooltipster('show');
+            if ($(error).text() !== '') {
+                $(element).tooltipster('content', $(error).text());
+                $(element).tooltipster('open');
+            }
         },
         success: function (label, element) {
             $(element).tooltipster('hide');
@@ -18,62 +22,39 @@ $(document).ready(function () {
         },
         messages: {
             username: {
-                required: "Debe proporcionar usuario"
+                required: "En necesario usuario"
             },
             password: {
-                required: "Debe proporcionar contraseña"
+                required: "Es necesario contraseña"
             }
         }
     });
 
-    $('#username, #password').tooltipster({
+    var tooltipsterObjects = $('#username, #password').tooltipster({
         trigger: 'custom',
-        onlyOne: false,
+        theme: 'tooltipster-punk',
         position: 'right',
-        theme: 'tooltipster-light'
     });
 
-    var msg = getUrlParameter('message');
-    if (msg) {
-        var tooltipsterObjects = $('#username').tooltipster({
-            content: '',
-            multiple: true,
-            position: 'right',
-            theme: 'tooltipster-light',
-            autoClose: true
-        });
-        var tooltip = tooltipsterObjects[0];
-        if (msg !== '') {
-            tooltip.content(urldecode(msg)).show();
-        }
-    }
-
-    $('#username').on('focusin', function () {
-        if (tooltip) {
-            tooltip.disable();
-        }
-    });
+    tooltip = tooltipsterObjects[0];
 
     $(document.body).on('click', '#submit', function (evt) {
         evt.preventDefault();
-        if (tooltip) {
-            tooltip.disable();
-        }
         if ($("#formLogin").valid()) {
-            $("#formLogin").ajaxSubmit({
-                cache: false,
-                url: "/default/auth/login",
-                type: "post",
-                dataType: "json",
+            $("#formLogin").ajaxSubmit({ url: "/default/auth/login", cache: false, type: "post", dataType: "json",
                 timeout: 3000,
                 success: function (res) {
                     if (res.success === true) {
                         document.location = res.landing;
                     } else {
-                        $('#errorMsg').html('<span style="color: red; font-size: 12px">' + res.message + '</span>')
-                                .fadeIn(500)
-                                .delay(1000)
-                                .fadeOut("slow");
+                        if (res.username) {
+                            $("#username").tooltipster('content', res.username);
+                            $("#username").tooltipster('open');
+                        }
+                        if (res.password) {
+                            $("#password").tooltipster('content', res.password);
+                            $("#password").tooltipster('open');
+                        }
                         
                     }
                 }

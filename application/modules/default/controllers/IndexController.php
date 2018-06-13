@@ -13,7 +13,6 @@ class Default_IndexController extends Zend_Controller_Action {
         $this->view->headMeta()->appendName('description', '');
         $this->view->headLink()
                 ->appendStylesheet("/bootstrap/css/bootstrap.min.css")
-                ->appendStylesheet('/webfontkit/stylesheet.css')
                 ->appendStylesheet('/css/styles.css');
         $this->view->headScript()
                 ->appendFile("/js/jquery-1.11.1.min.js")
@@ -25,25 +24,22 @@ class Default_IndexController extends Zend_Controller_Action {
     }
     
     public function postDispatch() {
-        $route = trim(DIRECTORY_SEPARATOR . $this->_request->getModuleName() . DIRECTORY_SEPARATOR . $this->_request->getControllerName() . DIRECTORY_SEPARATOR . $this->_request->getActionName() . '.js');
-        if (file_exists(realpath(APPLICATION_PATH . '/../public/js/') . $route)) {
-            $this->view->headScript()->appendFile('/js' . $route . "?" . time());
-        }
+
     }
 
     public function indexAction() {
         $this->view->headLink()
                 ->appendStylesheet("/bootstrap/css/bootstrap.min.css")
-                ->appendStylesheet("/css/styles.css");
+                ->appendStylesheet("/js/common/tooltipster/css/tooltipster.bundle.min.css");
         $this->view->headScript()
-                ->appendFile("/js/common/common.js")
-                ->appendFile("/js/common/jquery.form.min.js")
-                ->appendFile("/js/common/jquery.validate.min.js")
-                ->appendFile("/js/jquery-1.11.1.min.js")
-                ->appendFile("/bootstrap/js/bootstrap.min.js");
+            ->appendFile("/js/common/jquery.form.min.js")
+            ->appendFile("/js/common/jquery.validate.min.js")
+            ->appendFile("/js/common/tooltipster/js/tooltipster.bundle.min.js")
+            ->appendFile("/js/common/common.js")
+            ->appendFile("/js/default/index/index.js");
         try {
             $form = new Application_Form_Login();
-            $username = $this->getRequest()->getCookie('myVucemUsr');
+            $username = $this->getRequest()->getCookie('SimarPanelv1User');
             if (isset($username)) {
                 $form->populate(array(
                     "username" => $username

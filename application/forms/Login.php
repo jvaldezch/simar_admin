@@ -21,6 +21,7 @@ class Application_Form_Login extends Zend_Form {
             'placeholder' => "Usuario",
             'required' => true,
             'label' => 'Usuario:',
+            //'title' => 'Proporcionar usuario',
             'attribs' => array('class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus', 'autocomplete' => 'off'),
         ));
 
@@ -32,6 +33,7 @@ class Application_Form_Login extends Zend_Form {
             'placeholder' => "Contraseña",
             'required' => true,
             'label' => 'Contraseña:',
+            //'title' => 'Proporcionar contraseña de acceso',
             'attribs' => array('class' => 'form-control', 'required' => 'required'),
         ));
 

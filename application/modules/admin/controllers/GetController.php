@@ -16,6 +16,12 @@ class Admin_GetController extends Zend_Controller_Action {
         if (!$this->getRequest()->isXmlHttpRequest()) {
             throw new Zend_Controller_Request_Exception("Not an AJAX request detected");
         }
+        $auth = new Auth_Sessions();
+        if ($auth->isAuthenticated()) {
+                $auth->actualizar();
+        } else {
+            throw new Zend_Controller_Request_Exception("Session is required!");
+        }
     }
 
     public function productosAction() {

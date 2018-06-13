@@ -18,11 +18,17 @@ class Admin_IndexController extends Zend_Controller_Action {
                 ->appendStylesheet("/css/styles.css?" . time());
         $this->view->headScript()
                 ->appendFile("/js/jquery-1.11.1.min.js")
-                ->appendFile("/bootstrap/js/bootstrap.min.js");
+                ->appendFile("/bootstrap/js/bootstrap.min.js")
+                ->appendFile("/js/common/common.js");
     }
 
     public function preDispatch() {
-        
+        $auth = new Auth_Sessions();
+        if ($auth->isAuthenticated()) {
+                $auth->actualizar();
+        } else {
+                $this->getResponse()->setRedirect('/');
+        }
     }
     
     public function postDispatch() {
@@ -33,7 +39,7 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
         $this->view->headLink()
                 ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css")
-                ->appendStylesheet("/js/common/contentxmenu/jquery.contextMenu.min.css");;
+                ->appendStylesheet("/js/common/contentxmenu/jquery.contextMenu.min.css");
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
@@ -77,7 +83,6 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/common/common.js")
                 ->appendFile("/js/admin/index/categorias.js");
     }
 
@@ -85,7 +90,6 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Ver categoría";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/common/common.js")
                 ->appendFile("/js/admin/index/ver-categoria.js");
         $f = array(
                 "*" => array("StringTrim", "StripTags"),
@@ -113,7 +117,6 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | ANP regionales";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/common/common.js")
                 ->appendFile("/js/admin/index/poligonales.js");
     }
 
@@ -121,7 +124,6 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/common/common.js")
                 ->appendFile("/js/admin/index/bitacora.js");   
     }
 
@@ -156,7 +158,6 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Ver categoría";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/common/common.js")
                 ->appendFile("/js/admin/index/ver-poligonal.js");
         $f = array(
                 "*" => array("StringTrim", "StripTags"),

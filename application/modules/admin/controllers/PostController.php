@@ -12,7 +12,12 @@ class Admin_PostController extends Zend_Controller_Action {
     }
 
     public function preDispatch() {
-
+        $auth = new Auth_Sessions();
+        if ($auth->isAuthenticated()) {
+                $auth->actualizar();
+        } else {
+            throw new Zend_Controller_Request_Exception("Session is required!");
+        }
     }
 
     public function guardarProductoDeCategoriaAction() {

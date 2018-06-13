@@ -1,4 +1,4 @@
-function getAllUrlParams(url) {
+window.getAllUrlParams = function(url) {
 
     var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     var obj = {};
@@ -37,8 +37,18 @@ function getAllUrlParams(url) {
     }
 
     return obj;
-}
+};
 
 window.goBack = function() {
     window.history.back();
 };
+
+window.logout = function() {
+    return $.ajax({ url: '/default/auth/logout',
+        success: function (res) {
+            if (res.success === true) {
+                document.location = "/";
+            }
+        }
+    });
+}
