@@ -362,10 +362,10 @@ class Admin_GetController extends Zend_Controller_Action {
                         "filename" => $fileinfo->getFilename(),
                         "fecha" => $fileinfo->getMTime(),
                     );
-                    $i++;
+                    /*$i++;
                     if ($i == $input->size) {
                         break;
-                    }
+                    }*/
                 }
             }
             krsort($files);
