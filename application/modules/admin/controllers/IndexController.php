@@ -67,7 +67,8 @@ class Admin_IndexController extends Zend_Controller_Action {
                 $arr = $mppr->obtenerProducto($input->rid);
                 if (isset($arr)) {
                         $composition = $arr["composition"] = 'day' ? 'nsst' : $arr["compostion"];
-                        $url = "http://35.196.161.155:8085/tiles/satmo/" . $arr["sensor"] . "/" . $composition . "/" . date("Y-m-d", strtotime($arr["product_date"])) . "/wmts/nsst/webmercator/{z}/{x}/{y}.png";
+                        //$url = "http://35.196.161.155:8085/tiles/satmo/" . $arr["sensor"] . "/" . $composition . "/" . date("Y-m-d", strtotime($arr["product_date"])) . "/wmts/nsst/webmercator/{z}/{x}/{y}.png";
+                        $url = "https://simar.conabio.gob.mx:8443/tiles/satmo/" . $arr["sensor"] . "/" . $composition . "/" . date("Y-m-d", strtotime($arr["product_date"])) . "/wmts/nsst/webmercator/{z}/{x}/{y}.png";
                         $this->view->url = $url;
                         $this->view->layerName = strtoupper($arr["sensor"]) . " " . date("Y-m-d", strtotime($arr["product_date"]));
                         $this->view->xMin = $arr["x_min"];
