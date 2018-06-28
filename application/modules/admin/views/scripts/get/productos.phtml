@@ -2,6 +2,14 @@
     <?php foreach ($this->paginator as $item) { ?>
         <tr>
             <td>
+                <?php if (file_exists(str_replace('.tif', '.kmz', $item["path"]))) { ?>
+                    <a class="btn btn-xs btn-success" href="<?= str_replace($this->dataDir, $this->satmoDir, str_replace('.tif', '.kmz', $item["path"])) ?>" target="_blank" title="Descargar KMZ"><i class="fas fa-globe"></i></a>
+                <?php } ?>
+                <?php if (file_exists(str_replace('.tif', '.png', $item["path"]))) { ?>
+                    <a class="btn btn-xs btn-success" href="<?= str_replace($this->dataDir, $this->satmoDir, str_replace('.tif', '.png', $item["path"])) ?>" target="_blank" title="Descargar PNG"><i class="fas fa-image"></i></a>
+                <?php } ?>
+            </td>   
+            <td>
                 <a href="/admin/index/ver-producto?rid=<?= $item["rid"] ?>"><?= $item["rid"] ?></a>
             </td>
             <td><?= $item["year"] ?></td>

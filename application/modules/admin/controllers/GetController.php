@@ -54,7 +54,7 @@ class Admin_GetController extends Zend_Controller_Action {
             $view->paginator = $paginator;
 
             $view->dataDir = $this->_appConfig->getParam("opendap_dir");
-            $view->satmoDir = $this->_appConfig->getParam("satmo_url");
+            $view->satmoDir = $this->_appConfig->getParam("satmo_https");
 
             $paginatorControl = $view->paginationControl($paginator);
 
