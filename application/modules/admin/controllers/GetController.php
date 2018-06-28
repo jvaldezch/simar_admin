@@ -180,7 +180,7 @@ class Admin_GetController extends Zend_Controller_Action {
             if ($input->isValid("rid")) {
 
                 $dataDir = $this->_appConfig->getParam("opendap_dir");
-                $satmoDir = $this->_appConfig->getParam("satmo_url"); 
+                $satmoDir = $this->_appConfig->getParam("satmo_https"); 
 
                 $mppr = new Admin_Model_SatmoNcRs();
                 $row = $mppr->obtener($input->rid);
@@ -188,8 +188,19 @@ class Admin_GetController extends Zend_Controller_Action {
                 if (!empty($row)) {
                     foreach($row as $v) {
                         if ($v["format"] == 'GTiff') {
+
+                            $png = str_replace('.tif', '.png', $v["path"]);
+                            $kmz = str_replace('.tif', '.kmz', $v["path"]);
+
                             $arr["download"] = str_replace($dataDir, $satmoDir, $v["path"]);
+                            $arr["folder"] = str_replace($dataDir, $satmoDir, dirname($v["path"]));
                             $arr["filename"] = $v["filename"];
+                            if (file_exists($kmz)) {
+                                $arr["kmz"] = str_replace($dataDir, $satmoDir, $kmz);
+                            }
+                            if (file_exists($png)) {
+                                $arr["png"] = str_replace($dataDir, $satmoDir, $png);
+                            }
                             $arr["year"] = $v["year"];
                             $arr["day"] = $v["day"];
                             $arr["composition"] = $v["composition"];
@@ -362,10 +373,6 @@ class Admin_GetController extends Zend_Controller_Action {
                         "filename" => $fileinfo->getFilename(),
                         "fecha" => $fileinfo->getMTime(),
                     );
-                    /*$i++;
-                    if ($i == $input->size) {
-                        break;
-                    }*/
                 }
             }
             krsort($files);

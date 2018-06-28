@@ -29,11 +29,20 @@ window.verProducto = function (rid) {
                 $("#x_max").val(res.results.x_max);
                 $("#y_max").val(res.results.y_max);
 
-                //$("#thumbnail").attr('src', res.results.url + "&mode=map&layer=raster");
                 $("#downloadlink").attr('href', res.results.download)
                     .show();
                 $("#viewOnMap").attr('href', '/admin/index/ver-mapa?rid=' + rid)
                     .show();
+                $("#viewFolder").attr('href', res.results.folder)
+                    .show();
+                if (res.results.kmz) {
+                    $("#downloadKmz").attr('href', res.results.kmz)
+                        .show();
+                }
+                if (res.results.png) {
+                    $("#downloadPng").attr('href', res.results.png)
+                        .show();
+                }
                 obtenerMetadata(res.results.composition);
             }
         }

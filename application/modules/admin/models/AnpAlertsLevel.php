@@ -12,7 +12,9 @@ class Admin_Model_AnpAlertsLevel {
         try {
             $sql = $this->_db_table->select()
                     ->from($this->_db_table, array('*'))
-                    ->where("gid_anp = ?", $id);
+                    ->where("gid_anp = ?", $id)
+                    ->order("year DESC")
+                    ->order("week DESC");
             return $sql;
         } catch (Zend_Db_Exception $ex) {
             throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
