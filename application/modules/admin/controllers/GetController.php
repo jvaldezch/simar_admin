@@ -475,8 +475,8 @@ class Admin_GetController extends Zend_Controller_Action {
 
     public function commandAction() {
 
-        echo '<!doctype html><html lang="es"><head><meta charset="utf-8"><body>';
-        echo '<style>body {backgruond: #fff}</style>';
+        echo '<!doctype html><html lang="es"><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"><body>';
+        echo '<style>body {font-family:"Ubuntu";background: #fff}</style>';
         ob_implicit_flush(true);
         ob_end_flush();
 
