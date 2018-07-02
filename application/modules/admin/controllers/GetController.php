@@ -506,7 +506,7 @@ class Admin_GetController extends Zend_Controller_Action {
         ob_end_flush();
 
         $cmd = $this->_appConfig->getParam("pysimar_home") . "/./conversion.py --sensor ghrsst --composition m-nsst --type kmz --year 2018 --month 6";
-        print $cmd . '<br>';
+        //print $cmd . '<br>';
 
         $descriptorspec = array(
             0 => array("pipe", "r"),   // stdin is a pipe that the child will read from
@@ -519,10 +519,10 @@ class Admin_GetController extends Zend_Controller_Action {
         if (is_resource($process)) {
 
             while ($s = fgets($pipes[1])) {
-                print $s . '<br>';
+                print $s;
             }
         }
-        
+
     }
 
     public function obtenerNsstAction() {

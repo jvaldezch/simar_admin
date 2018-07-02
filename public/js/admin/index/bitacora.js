@@ -197,14 +197,16 @@ window.obtenerSba = function(year, month) {
     });
 };
 
-
 window.executeCommand = function() {
     return $.ajax({
         url: '/admin/get/execute-command',
         beforeSend: function (res) {
+            $("#commands").LoadingOverlay("show", { color: "rgba(255, 255, 255, 0.9)" });
+            $("#commands").html('');
         },
         success: function (res) {
-            console.log(res);
+            $("#commands").LoadingOverlay("hide", true);
+            $("#commands").html(res);
         }
     });
 };
@@ -238,6 +240,10 @@ $(document).ready(function () {
 
     $(document.body).on('change', '#table-results-selector', function () {
         tableProducts();
+    });
+
+    $(document.body).on('click', '#run', function () {
+        executeCommand();
     });
 
 });
