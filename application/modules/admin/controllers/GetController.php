@@ -441,4 +441,204 @@ class Admin_GetController extends Zend_Controller_Action {
         }
     }
 
+    public function calendarAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "year" => array("Digits"),
+                "month" => array("Digits"),
+            );
+            $v = array(
+                "year" => array(new Zend_Validate_Int()),
+                "month" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("year") && $input->isValid("month")) {
+
+                $view = new Zend_View();
+                $view->setScriptPath(realpath(dirname(__FILE__)) . "/../views/scripts/get/");
+                $view->setHelperPath(realpath(dirname(__FILE__)) . "/../views/helpers/");
+
+                $view->month = $input->month;
+                $view->year = $input->year;
+
+                $this->_helper->json(array("success" => true, "results" => $view->render("calendar.phtml")));
+
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function obtenerNsstAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "year" => array("Digits"),
+                "month" => array("Digits"),
+            );
+            $v = array(
+                "year" => array(new Zend_Validate_Int()),
+                "month" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("year") && $input->isValid("month")) {
+                $mppr = new Admin_Model_SatmoNc();
+                $arr = $mppr->obtenerNsst($input->year, $input->month);
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function obtenerWnsstAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "year" => array("Digits"),
+                "month" => array("Digits"),
+            );
+            $v = array(
+                "year" => array(new Zend_Validate_Int()),
+                "month" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("year") && $input->isValid("month")) {
+                $mppr = new Admin_Model_SatmoNc();
+                $arr = $mppr->obtenerWnsst($input->year, $input->month);
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function obtenerWynsstAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "year" => array("Digits"),
+                "month" => array("Digits"),
+            );
+            $v = array(
+                "year" => array(new Zend_Validate_Int()),
+                "month" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("year") && $input->isValid("month")) {
+                $mppr = new Admin_Model_SatmoNc();
+                $arr = $mppr->obtenerWynsst($input->year, $input->month);
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function obtenerMnsstAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "year" => array("Digits"),
+                "month" => array("Digits"),
+            );
+            $v = array(
+                "year" => array(new Zend_Validate_Int()),
+                "month" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("year") && $input->isValid("month")) {
+                $mppr = new Admin_Model_SatmoNc();
+                $arr = $mppr->obtenerMnsst($input->year, $input->month);
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function obtenerWhsAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "year" => array("Digits"),
+                "month" => array("Digits"),
+            );
+            $v = array(
+                "year" => array(new Zend_Validate_Int()),
+                "month" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("year") && $input->isValid("month")) {
+                $mppr = new Admin_Model_SatmoNc();
+                $arr = $mppr->obtenerWhs($input->year, $input->month);
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function obtenerDhwAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "year" => array("Digits"),
+                "month" => array("Digits"),
+            );
+            $v = array(
+                "year" => array(new Zend_Validate_Int()),
+                "month" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("year") && $input->isValid("month")) {
+                $mppr = new Admin_Model_SatmoNc();
+                $arr = $mppr->obtenerDhw($input->year, $input->month);
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function obtenerSbaAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "year" => array("Digits"),
+                "month" => array("Digits"),
+            );
+            $v = array(
+                "year" => array(new Zend_Validate_Int()),
+                "month" => array(new Zend_Validate_Int()),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("year") && $input->isValid("month")) {
+                $mppr = new Admin_Model_SatmoNc();
+                $arr = $mppr->obtenerSba($input->year, $input->month);
+                $this->_helper->json(array("success" => true, "results" => $arr));
+            } else {
+                throw new Exception("Invalid input!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
 }
