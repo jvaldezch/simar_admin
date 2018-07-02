@@ -197,6 +197,19 @@ window.obtenerSba = function(year, month) {
     });
 };
 
+
+window.executeCommand = function() {
+    return $.ajax({
+        url: '/admin/get/execute-command',
+        beforeSend: function (res) {
+        },
+        success: function (res) {
+            console.log(res);
+        }
+    });
+};
+
+
 window.mesAnterior = function(year, month) {
     var d = new Date(year + "/" + month + "/01");
     d.setMonth(d.getMonth() - 1);
