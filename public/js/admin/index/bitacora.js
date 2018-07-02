@@ -59,6 +59,11 @@ window.calendar = function(year, month) {
     });
 };
 
+window.urlProducto = function(url, product) {
+    var url = '<a style="float:left; padding: 3px 3px" href="' + url + '" target="_blank">' + product + '</a>';
+    return url;
+}
+
 window.obtenerNsst = function(year, month) {
     return $.ajax({
         url: '/admin/get/obtener-nsst',
@@ -69,7 +74,7 @@ window.obtenerNsst = function(year, month) {
             if (res.success === true) {
                 for (var index in res.results) {
                     var obj = res.results[index];
-                    $("#" + obj.product_id).append('<a href="' + obj.url + '" target="_blank">nsst</a><br>');
+                    $("#" + obj.product_id).append(urlProducto(obj.url, 'nsst'));
                 }
                 return true;
             }
@@ -88,7 +93,7 @@ window.obtenerWsst = function(year, month) {
             if (res.success === true) {
                 for (var index in res.results) {
                     var obj = res.results[index];
-                    $("#" + obj.product_id).append('<a href="' + obj.url + '" target="_blank">w-nsst</a><br>');
+                    $("#" + obj.product_id).append(urlProducto(obj.url, 'w-nsst'));
                 }
                 return true;
             }
@@ -107,7 +112,7 @@ window.obtenerWysst = function(year, month) {
             if (res.success === true) {
                 for (var index in res.results) {
                     var obj = res.results[index];
-                    $("#" + obj.product_id).append('<a href="' + obj.url + '" target="_blank">wy-nsst</a><br>');
+                    $("#" + obj.product_id).append(urlProducto(obj.url, 'wy-nsst'));
                 }
                 return true;
             }
@@ -126,7 +131,7 @@ window.obtenerMnsst = function(year, month) {
             if (res.success === true) {
                 for (var index in res.results) {
                     var obj = res.results[index];
-                    $("#" + obj.product_id).append('<a href="' + obj.url + '" target="_blank">m-nsst</a><br>');
+                    $("#" + obj.product_id).append(urlProducto(obj.url, 'm-nsst'));
                 }
                 return true;
             }
@@ -145,7 +150,7 @@ window.obtenerWhs = function(year, month) {
             if (res.success === true) {
                 for (var index in res.results) {
                     var obj = res.results[index];
-                    $("#" + obj.product_id).append('<a href="' + obj.url + '" target="_blank">whs</a><br>');
+                    $("#" + obj.product_id).append(urlProducto(obj.url, 'whs'));
                 }
                 return true;
             }
@@ -164,7 +169,7 @@ window.obtenerDhw = function(year, month) {
             if (res.success === true) {
                 for (var index in res.results) {
                     var obj = res.results[index];
-                    $("#" + obj.product_id).append('<a href="' + obj.url + '" target="_blank">dhw</a><br>');
+                    $("#" + obj.product_id).append(urlProducto(obj.url, 'dhw'));
                 }
                 return true;
             }
@@ -183,7 +188,7 @@ window.obtenerSba = function(year, month) {
             if (res.success === true) {
                 for (var index in res.results) {
                     var obj = res.results[index];
-                    $("#" + obj.product_id).append('<a href="' + obj.url + '" target="_blank">sba</a><br>');
+                    $("#" + obj.product_id).append(urlProducto(obj.url, 'sba'));
                 }
                 return true;
             }
