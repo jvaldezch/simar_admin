@@ -475,6 +475,8 @@ class Admin_GetController extends Zend_Controller_Action {
 
     public function commandAction() {
 
+        echo '<!doctype html><html lang="es"><head><meta charset="utf-8"><body>';
+        echo '<style>body {backgruond: #fff}</style>';
         ob_implicit_flush(true);
         ob_end_flush();
 
@@ -495,7 +497,7 @@ class Admin_GetController extends Zend_Controller_Action {
                 print $s . '<br>';
             }
         }
-
+        echo '</body></html>';
     }
 
     public function obtenerNsstAction() {
