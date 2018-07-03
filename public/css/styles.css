@@ -120,6 +120,58 @@ footer {
     background-color: #283560
 }
 
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 10px 15px;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 30px;
+}
+
+.navbar-blue .navbar-brand,
+.navbar-blue .navbar-brand:hover {
+    color: #fff;
+}
+
+
+.navbar-blue {
+    background-color: #283560;
+    border-color: none !important;
+    border: none;
+}
+
+.navbar-blue .navbar-nav > li > a:focus, 
+.navbar-blue .navbar-nav > li > a:hover {
+    color: #fff;
+    background-color: rgb(59, 74, 123);
+}
+
+.navbar-blue .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar-blue .navbar-nav > .active > a, 
+.navbar-blue .navbar-nav > .active > a:focus, 
+.navbar-blue .navbar-nav > .active > a:hover {
+    color: #fefefe;
+    background-color: #1D2951;
+}
+.nav > li > a > img {
+    max-width: none;
+}
+.user-profile img {
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
 .simar-menu-logo {
     width: 300px;
     padding: 10px;

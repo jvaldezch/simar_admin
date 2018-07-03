@@ -26,6 +26,7 @@ window.verProductoDeCategoria = function (rid) {
 $(document).ready(function () {
 
     editor = $('#edit').froalaEditor({
+        charCounterCount: false,
         saveInterval: 0,
         saveParam: ['content'],
         saveURL: '/admin/post/guardar-producto-de-categoria',

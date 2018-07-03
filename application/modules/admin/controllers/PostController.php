@@ -54,6 +54,40 @@ class Admin_PostController extends Zend_Controller_Action {
         }
     }
 
+    public function guardarCategoriaAction() {
+        try {
+            $r = $this->getRequest();
+            if ($r->isPost()) {
+                $f = array(
+                    "*" => array("StringTrim"),
+                    "id" => "Digits",
+                );
+                $v = array(
+                    "id" => array("NotEmpty", new Zend_Validate_Int()),
+                    "content" => array("NotEmpty"),
+                );
+                $input = new Zend_Filter_Input($f, $v, $r->getPost());
+                if ($input->isValid("id") && $input->isValid("content")) {
+
+                    $mppr = new Admin_Model_Categories();
+
+                    $arr = array('description' => html_entity_decode($input->content), 'updated_at' => date('Y-m-d H:i:s'));
+                    if ($mppr->actualizarCaterogia($input->id, $arr)) {
+                        $this->_helper->json(array("success" => true));
+                    }
+                    $this->_helper->json(array("success" => false));
+
+                } else {
+                    throw new Exception("Invalid input!");
+                }
+            } else {
+                throw new Exception("Invalid request type!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
     public function guardarParametrosProductoDeCategoriaAction() {
         try {
             $r = $this->getRequest();

@@ -1,3 +1,8 @@
+<style>
+    #edit p {
+        color: #333;
+    }
+</style>
 <h4><strong>Categoría</strong>: <?= $this->name ?></h4>
 
 <form id="form">
@@ -41,6 +46,18 @@
     </table>
 </form>
 
+<h4>Metadata de categoría</h4>
+
+<div id="editor">
+    <div id='edit'>
+        <?= $this->description ?>
+    </div>
+    <br>
+</div>
+<button class="btn btn-primary btn-sm pull-right" id="saveButton">
+    <i class="far fa-save"></i> Guardar</button>
+
+<br><br>
 <h4>Productos</h4>
 
 <div id="table-results" style="min-height: 400px">
@@ -73,4 +90,5 @@
     <div id="table-results-paginator"></div>
 </div>
 
-<a class="btn btn-success" href="/admin/index/categorias">Regresar</a>
+<a class="btn btn-success" href="/admin/index/categorias">
+    <i class="fas fa-angle-double-left"></i> Regresar</a>

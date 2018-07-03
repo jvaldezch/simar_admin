@@ -25,10 +25,31 @@ window.tableProducts = function (page, size) {
 
 $(document).ready(function () {
 
+    editor = $('#edit').froalaEditor({
+        charCounterCount: false,
+        saveInterval: 0,
+        saveParam: ['content'],
+        saveURL: '/admin/post/guardar-categoria',
+        saveMethod: 'POST',
+        saveParams: {id: $('#id').val()}
+    }).on('froalaEditor.save.before', function (e, editor) {
+        // Before save request is made.
+    })
+    .on('froalaEditor.save.after', function (e, editor, response) {
+        $.alert({title: "Confirmación", type: "blue", content: "La información se guardo.", boxWidth: "350px", useBootstrap: false});
+    })
+    .on('froalaEditor.save.error', function (e, editor, error) {
+        // Do something here.
+    });
+
     tableProducts();
 
     $(document.body).on('click', '#update', function () {
         tableProducts();
+    });
+
+    $(document.body).on('click', '#saveButton', function () {
+        $('#edit').froalaEditor('save.save')
     });
 
     $(document.body).on('click', '#search', function () {

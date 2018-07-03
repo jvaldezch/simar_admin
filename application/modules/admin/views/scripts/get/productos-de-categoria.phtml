@@ -2,9 +2,12 @@
     <?php foreach ($this->paginator as $item) { ?>
         <tr>
             <td>
-                <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>"><?= $item["id"] ?></a>
+                <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>">
+                    <i class="fas fa-folder-open"></i></a>
             </td>
-            <td><?= $item["spanish_title"] ?></td>
+            <td>
+            <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>">
+                <?= $item["spanish_title"] ?></a></td>
             <td>
                 <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>"><?= strtoupper($item["composition"]) ?></a>
             </td>

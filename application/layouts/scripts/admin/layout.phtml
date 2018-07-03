@@ -15,10 +15,10 @@
         <![endif]-->
     </head>
     <body role="document">
+        <?= $this->render("admin/menu.phtml") ?>
         <div class="container-fluid">
-            <div class="row">
-                <?= $this->render("admin/menu.phtml") ?>
-            </div>
+            <!--<div class="row">
+            </div>-->
             <div class="row" style="margin-top: 10px">
                 <div class="col-md-12">                    
                     <?= $this->layout()->content; ?>

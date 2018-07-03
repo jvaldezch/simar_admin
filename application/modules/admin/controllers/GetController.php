@@ -473,33 +473,6 @@ class Admin_GetController extends Zend_Controller_Action {
         }
     }
 
-    public function commandAction() {
-
-        echo '<!doctype html><html lang="es"><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"><body>';
-        echo '<style>body {font-family:"Ubuntu";background: #fff}</style>';
-        ob_implicit_flush(true);
-        ob_end_flush();
-
-        $cmd = $this->_appConfig->getParam("pysimar_home") . "/./conversion.py --sensor ghrsst --composition m-nsst --type kmz --year 2018 --month 6";
-        print $cmd . '<br>';
-
-        $descriptorspec = array(
-            0 => array("pipe", "r"),   // stdin is a pipe that the child will read from
-            1 => array("pipe", "w"),   // stdout is a pipe that the child will write to
-            2 => array("pipe", "w")    // stderr is a pipe that the child will write to
-        );
-
-        $process = proc_open($cmd, $descriptorspec, $pipes, realpath('./'), array());
-
-        if (is_resource($process)) {
-
-            while ($s = fgets($pipes[1])) {
-                print $s . '<br>';
-            }
-        }
-        echo '</body></html>';
-    }
-
     public function executeCommandAction() {
 
         ob_implicit_flush(true);
