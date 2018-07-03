@@ -45,7 +45,7 @@ class Admin_IndexController extends Zend_Controller_Action {
                 ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
                 ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/locales/bootstrap-datepicker.es.min.js")
                 ->appendFile("/js/common/contentxmenu/jquery.contextMenu.min.js")
-                ->appendFile("/js/admin/index/index.js");
+                ->appendFile("/js/admin/index/index.js?" . time());
     }
 
     public function verProductoAction() {
@@ -53,7 +53,7 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/common/common.js")
-                ->appendFile("/js/admin/index/ver-producto.js");
+                ->appendFile("/js/admin/index/ver-producto.js?" . time());
         $f = array(
                 "*" => array("StringTrim", "StripTags"),
                 "rid" => array("Digits"),
@@ -84,7 +84,7 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/admin/index/categorias.js");
+                ->appendFile("/js/admin/index/categorias.js?" . time());
     }
 
     public function verCategoriaAction() {
@@ -152,7 +152,7 @@ class Admin_IndexController extends Zend_Controller_Action {
                 ->appendFile("/js/common/jquery.form.min.js")
                 ->appendFile("/js/common/jquery.validate.min.js")
                 ->appendFile("/js/common/confirm/jquery-confirm.min.js")
-                ->appendFile("/js/admin/index/ver-categoria.js");
+                ->appendFile("/js/admin/index/ver-categoria.js?" . time());
         $f = array(
                 "*" => array("StringTrim", "StripTags"),
                 "id" => array("Digits"),
@@ -180,14 +180,14 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | ANP regionales";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/admin/index/poligonales.js");
+                ->appendFile("/js/admin/index/poligonales.js?" . time());
     }
 
     public function bitacoraAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/admin/index/bitacora.js");   
+                ->appendFile("/js/admin/index/bitacora.js?" . time());   
     }
 
     public function verMapaAction() {
@@ -221,7 +221,7 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->title = $this->_appConfig->getParam("title") . " | Ver categoría";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/admin/index/ver-poligonal.js");
+                ->appendFile("/js/admin/index/ver-poligonal.js?" . time());
         $f = array(
                 "*" => array("StringTrim", "StripTags"),
                 "id" => array("Digits"),
@@ -299,7 +299,7 @@ class Admin_IndexController extends Zend_Controller_Action {
                 ->appendFile("/js/common/jquery.form.min.js")
                 ->appendFile("/js/common/jquery.validate.min.js")
                 ->appendFile("/js/common/confirm/jquery-confirm.min.js")
-                ->appendFile("/js/admin/index/ver-producto-de-categoria.js");
+                ->appendFile("/js/admin/index/ver-producto-de-categoria.js?" . time());
         $f = array(
                 "*" => array("StringTrim", "StripTags"),
                 "id" => array("Digits"),
