@@ -8,19 +8,25 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/admin">SIMAR | Web Panel</a>
+      <a href="/admin" class="navbar-brand">
+        <img src="/images/simar.png" style="width: 100px; float: left"> | </a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <!--<li class="active"><a href="/admin">Acervo de imágenes</a></li>-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acervo de imágenes <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">SATMO</a></li>
-            <li><a href="#">SATcoral</a></li>
+            <li><a href="/admin/index/satmo">SATMO</a></li>
+            <li><a href="/admin/index/satcoral">SATcoral</a></li>
           </ul>
         </li>
-        <li><a href="/admin/index/categorias">Metadata</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Metadata <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/admin/index/categorias">Categorías</a></li>
+            <li><a href="/admin/index/productos">Productos</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Información vectorial <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -28,7 +34,15 @@
             <li><a href="/admin/index/poligonales">ANP regionales</a></li>
           </ul>
         </li>
-        <li><a href="/admin/index/bitacora">Bitacora</a></li>
+        <!--<li><a href="/admin/index/bitacora">Bitacora</a></li>-->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bitacora <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/admin/index/bitacora">Log del servidor</a></li>
+            <li><a href="/admin/index/calendario">Calendario</a></li>
+            <li><a href="/admin/index/produccion">Producción</a></li>
+          </ul>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="">
@@ -41,8 +55,6 @@
             <li><a href="javascript:;" id="logout" title="Salir" onclick="javascript:logout();"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
           </ul>
         </li>
-        <!--<li>
-            <a><i class="fas fa-sign-out-alt" style="cursor: pointer" id="logout" title="Salir" onclick="javascript:logout();"></i></a></li>-->
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->

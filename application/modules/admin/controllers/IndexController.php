@@ -48,8 +48,34 @@ class Admin_IndexController extends Zend_Controller_Action {
                 ->appendFile("/js/admin/index/index.js?" . time());
     }
 
+    public function satmoAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | SATMO";
+        $this->view->headLink()
+                ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css")
+                ->appendStylesheet("/js/common/contentxmenu/jquery.contextMenu.min.css");
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/locales/bootstrap-datepicker.es.min.js")
+                ->appendFile("/js/common/contentxmenu/jquery.contextMenu.min.js")
+                ->appendFile("/js/admin/index/satmo.js?" . time());
+    }
+
+    public function satcoralAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | SATcoral";
+        $this->view->headLink()
+                ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css")
+                ->appendStylesheet("/js/common/contentxmenu/jquery.contextMenu.min.css");
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/locales/bootstrap-datepicker.es.min.js")
+                ->appendFile("/js/common/contentxmenu/jquery.contextMenu.min.js")
+                ->appendFile("/js/admin/index/satcoral.js?" . time());
+    }
+
     public function verProductoAction() {
-        $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
+        $this->view->title = $this->_appConfig->getParam("title") . " | Producto";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/common/common.js")
@@ -81,14 +107,21 @@ class Admin_IndexController extends Zend_Controller_Action {
     }
 
     public function categoriasAction() {
-        $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
+        $this->view->title = $this->_appConfig->getParam("title") . " | Categorías";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/admin/index/categorias.js?" . time());
     }
 
+    public function productosAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Productos";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/index/productos.js?" . time());
+    }
+
     public function verCategoriaAction() {
-        $this->view->title = $this->_appConfig->getParam("title") . " | Ver categoría";
+        $this->view->title = $this->_appConfig->getParam("title") . " | Categoría";
         $this->view->headLink()
                 ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css")
                 ->appendStylesheet("/js/common/froala/css/froala_editor.css")
@@ -184,10 +217,24 @@ class Admin_IndexController extends Zend_Controller_Action {
     }
 
     public function bitacoraAction() {
-        $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
+        $this->view->title = $this->_appConfig->getParam("title") . " | Log del servidor";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/admin/index/bitacora.js?" . time());   
+    }
+
+    public function calendarioAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Calendario";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/index/calendario.js?" . time());   
+    }
+
+    public function produccionAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Producción";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/index/produccion.js?" . time());   
     }
 
     public function verMapaAction() {

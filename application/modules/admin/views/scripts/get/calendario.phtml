@@ -1,5 +1,5 @@
 <style>
-table.calendar		{ border-left:1px solid #999; }
+table.calendar		{ border-left:1px solid #999; width:100% }
 tr.calendar-row	{ background-color: #fff; }
 td.calendar-day	{ min-height:80px; font-size:11px; position:relative; } * html div.calendar-day { height:80px; }
 td.calendar-day:hover	{ background:#eceff5; }
@@ -79,7 +79,7 @@ function draw_calendar($month,$year){
 ?>
 <div class="calendar-products" style="min-height: 350px">
     <div style="float: left; margin: 0 !important">
-        <h3 style="margin: 0"><?= date('F', strtotime($this->year . '-' . $this->month . '-01')) ?> <?= $this->year ?></h3>
+		<h4><?= date('F', strtotime($this->year . '-' . $this->month . '-01')) ?> <?= $this->year ?></h4>
     </div>
     <div style="float:right">
         <ul class="pagination pagination-sm">

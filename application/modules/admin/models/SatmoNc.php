@@ -8,13 +8,16 @@ class Admin_Model_SatmoNc {
         $this->_db_table = new Admin_Model_DbTable_SatmoNc();
     }
 
-    public function obtener($year = null, $type = null) {
+    public function obtener($year = null, $sensor = null, $type = null) {
         try {
             $sql = $this->_db_table->select()
                     ->from($this->_db_table, array('*'))
                     ->order("product_date DESC");
             if (isset($year)) {
                 $sql->where('year = ?', $year);
+            }
+            if (isset($sensor)) {
+                $sql->where('sensor = ?', $sensor);
             }
             if (isset($type)) {
                 $sql->where('composition = ?', $type);

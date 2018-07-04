@@ -1,37 +1,24 @@
 <?php if (isset($this->paginator)) { ?>
-    <?php foreach ($this->paginator as $item) { 
-        $kmz = str_replace(array('.tif', '.nc'), '.kmz', $item["path"]);
-        $png = str_replace(array('.tif', '.nc'), '.png', $item["path"]);
-        ?>
+    <?php foreach ($this->paginator as $item) { ?>
         <tr>
             <td>
-                <a href="/admin/index/ver-producto?rid=<?= $item["rid"] ?>">
+                <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>">
                     <i class="fas fa-folder-open"></i></a>
             </td>
-            <td><?= $item["year"] ?></td>
-            <td><?= $item["month"] ?></td>
-            <td><?= $item["week"] ?></td>
-            <td><?= $item["day"] ?></td>
-            <td><?= $item["composition"] ?></td>
-            <td><?= $item["sensor"] ?></td>
-            <td><?= $item["product"] ?></td>
             <td>
-                <a href="<?= str_replace($this->dataDir, $this->satmoDir, $item["path"]) ?>"><?= $item["filename"] ?></a>
+            <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>">
+                <?= $item["spanish_title"] ?></a></td>
+            <td>
+                <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>"><?= strtoupper($item["composition"]) ?></a></td>
+            <td>
+                <?= $item["title"] ?></td>
             </td>
-            <td>
-                <?php if (file_exists($kmz)) { ?>
-                    <a class="btn btn-xs btn-success" href="<?= str_replace($this->dataDir, $this->satmoDir, $kmz) ?>" target="_blank" title="Descargar KMZ"><i class="fas fa-globe"></i></a>
-                <?php } ?>
-                <?php if (file_exists($png)) { ?>
-                    <a class="btn btn-xs btn-success" href="<?= str_replace($this->dataDir, $this->satmoDir, $png) ?>" target="_blank" title="Descargar PNG"><i class="fas fa-image"></i></a>
-                <?php } ?>
-            </td>   
-            <td><?= date("d/m/Y", strtotime($item["product_date"])) ?></td>
+            <td><?= date("d/m/Y", strtotime($item["created_at"])) ?></td>
         </tr>
     <?php } ?>
 <?php } else { ?>
     <tr>
-        <td colspan="8">
+        <td colspan="5">
             <em>No hay productos</em>
         </td>
     </tr>

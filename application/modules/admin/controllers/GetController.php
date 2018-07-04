@@ -24,7 +24,7 @@ class Admin_GetController extends Zend_Controller_Action {
         }
     }
 
-    public function productosAction() {
+    public function productosSatmoAction() {
         try {
             $view = new Zend_View();
             $view->setScriptPath(realpath(dirname(__FILE__)) . "/../views/scripts/get/");
@@ -46,7 +46,7 @@ class Admin_GetController extends Zend_Controller_Action {
             $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
 
             $mppr = new Admin_Model_SatmoNc();
-            $arr = $mppr->obtener($input->year, $input->type);
+            $arr = $mppr->obtener($input->year, 'ghrsst', $input->type);
 
             $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($arr));
             $paginator->setItemCountPerPage($input->size);
@@ -58,7 +58,47 @@ class Admin_GetController extends Zend_Controller_Action {
 
             $paginatorControl = $view->paginationControl($paginator);
 
-            $this->_helper->json(array("success" => true, "results" => $view->render("productos.phtml"), "paginator" => $paginatorControl, "info" => $paginator->getPages()));
+            $this->_helper->json(array("success" => true, "results" => $view->render("productos-satmo.phtml"), "paginator" => $paginatorControl, "info" => $paginator->getPages()));
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function productosSatcoralAction() {
+        try {
+            $view = new Zend_View();
+            $view->setScriptPath(realpath(dirname(__FILE__)) . "/../views/scripts/get/");
+            $view->setHelperPath(realpath(dirname(__FILE__)) . "/../views/helpers/");
+
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "page" => array("Digits"),
+                "size" => array("Digits"),
+                "year" => array("Digits"),
+                "type" => array("StringToLower"),
+            );
+            $v = array(
+                "page" => array(new Zend_Validate_Int(), "default" => 1),
+                "size" => array(new Zend_Validate_Int(), "default" => 20),
+                "year" => array(new Zend_Validate_Int()),
+                "type" => array("NotEmpty"),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+
+            $mppr = new Admin_Model_SatmoNc();
+            $arr = $mppr->obtener($input->year, 'satcoral', $input->type);
+
+            $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($arr));
+            $paginator->setItemCountPerPage($input->size);
+            $paginator->setCurrentPageNumber($input->page);
+            $view->paginator = $paginator;
+
+            $view->dataDir = $this->_appConfig->getParam("opendap_dir");
+            $view->satmoDir = $this->_appConfig->getParam("satmo_https");
+
+            $paginatorControl = $view->paginationControl($paginator);
+
+            $this->_helper->json(array("success" => true, "results" => $view->render("productos-satcoral.phtml"), "paginator" => $paginatorControl, "info" => $paginator->getPages()));
         } catch (Exception $ex) {
             $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
         }
@@ -270,6 +310,41 @@ class Admin_GetController extends Zend_Controller_Action {
         }
     }
 
+    public function productosAction() {
+        try {
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "page" => array("Digits"),
+                "size" => array("Digits"),
+            );
+            $v = array(
+                "page" => array(new Zend_Validate_Int(), "default" => 1),
+                "size" => array(new Zend_Validate_Int(), "default" => 20),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+            if ($input->isValid("page") && $input->isValid("size")) {
+
+                $view = new Zend_View();
+                $view->setScriptPath(realpath(dirname(__FILE__)) . "/../views/scripts/get/");
+                $view->setHelperPath(realpath(dirname(__FILE__)) . "/../views/helpers/");
+
+                $mppr = new Admin_Model_CaProducts();
+                $arr = $mppr->todos();
+
+                $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($arr));
+                $paginator->setItemCountPerPage($input->size);
+                $paginator->setCurrentPageNumber($input->page);
+                $view->paginator = $paginator;
+
+                $paginatorControl = $view->paginationControl($paginator);
+
+                $this->_helper->json(array("success" => true, "results" => $view->render("productos.phtml"), "paginator" => $paginatorControl, "info" => $paginator->getPages()));
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
     public function productosDeCategoriaAction() {
         try {
             $f = array(
@@ -441,7 +516,7 @@ class Admin_GetController extends Zend_Controller_Action {
         }
     }
 
-    public function calendarAction() {
+    public function calendarioAction() {
         try {
             $f = array(
                 "*" => array("StringTrim", "StripTags"),
@@ -462,7 +537,7 @@ class Admin_GetController extends Zend_Controller_Action {
                 $view->month = $input->month;
                 $view->year = $input->year;
 
-                $this->_helper->json(array("success" => true, "results" => $view->render("calendar.phtml")));
+                $this->_helper->json(array("success" => true, "results" => $view->render("calendario.phtml")));
 
                 $this->_helper->json(array("success" => true, "results" => $arr));
             } else {
