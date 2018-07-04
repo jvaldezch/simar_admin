@@ -37,14 +37,7 @@ class Admin_IndexController extends Zend_Controller_Action {
 
     public function indexAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Admin";
-        $this->view->headLink()
-                ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css")
-                ->appendStylesheet("/js/common/contentxmenu/jquery.contextMenu.min.css");
         $this->view->headScript()
-                ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
-                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/locales/bootstrap-datepicker.es.min.js")
-                ->appendFile("/js/common/contentxmenu/jquery.contextMenu.min.js")
                 ->appendFile("/js/admin/index/index.js?" . time());
     }
 
@@ -232,8 +225,12 @@ class Admin_IndexController extends Zend_Controller_Action {
 
     public function produccionAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Producción";
+        $this->view->headLink()
+                ->appendStylesheet("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css");        
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js")
+                ->appendFile("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/locales/bootstrap-datepicker.es.min.js")
                 ->appendFile("/js/admin/index/produccion.js?" . time());   
     }
 
