@@ -1,27 +1,5 @@
 
-window.tableProducts = function (page, size) {
-    if (page === undefined) {
-        page = 1;
-    }
-    if (size === undefined) {
-        size = $("#table-results-selector").val();
-    }
-    return $.ajax({
-        url: '/admin/get/productos-de-categoria',
-        data: { page: page, size: size, id: $("#id").val() },
-        beforeSend: function (res) {
-            $("#table-results").LoadingOverlay("show", { color: "rgba(255, 255, 255, 0.9)" });
-        },
-        success: function (res) {
-            $("#table-results").LoadingOverlay("hide", true);
-            if (res.success === true) {
-                $("table#results tbody").html(res.results);
-                $("#table-results-paginator").html(res.paginator);
-                $("#table-results-info").html("Página " + res.info.current + " de " + res.info.pageCount);
-            }
-        }
-    });
-};
+
 
 $(document).ready(function () {
 
@@ -42,14 +20,20 @@ $(document).ready(function () {
         // Do something here.
     });
 
-    tableProducts();
-
-    $(document.body).on('click', '#update', function () {
-        tableProducts();
-    });
-
     $(document.body).on('click', '#saveButton', function () {
         $('#edit').froalaEditor('save.save')
+    });
+
+    $(document.body).on('click', '#submit', function () {
+        if ($("#form").valid()) {
+            $("#form").ajaxSubmit({ url: "/admin/post/guardar-detalle-categoria", cache: false, type: "post", dataType: "json",
+                timeout: 3000,
+                success: function (res) {
+                    if (res.success === true) {
+                    }
+                }
+            });
+        }
     });
 
     $(document.body).on('click', '#search', function () {

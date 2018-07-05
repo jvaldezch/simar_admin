@@ -1,5 +1,5 @@
 
-window.tableProducts = function (page, size) {
+/*window.tableProducts = function (page, size) {
     if (page === undefined) {
         page = 1;
     }
@@ -21,7 +21,7 @@ window.tableProducts = function (page, size) {
             }
         }
     });
-};
+};*/
 
 $(document).ready(function () {
 
@@ -29,7 +29,7 @@ $(document).ready(function () {
         charCounterCount: false,
         saveInterval: 0,
         saveParam: ['content'],
-        saveURL: '/admin/post/guardar-categoria',
+        saveURL: '/admin/post/guardar-grupo',
         saveMethod: 'POST',
         saveParams: {id: $('#id').val()}
     }).on('froalaEditor.save.before', function (e, editor) {
@@ -42,14 +42,20 @@ $(document).ready(function () {
         // Do something here.
     });
 
-    tableProducts();
-
-    $(document.body).on('click', '#update', function () {
-        tableProducts();
-    });
-
     $(document.body).on('click', '#saveButton', function () {
         $('#edit').froalaEditor('save.save')
+    });
+
+    $(document.body).on('click', '#submit', function () {
+        if ($("#form").valid()) {
+            $("#form").ajaxSubmit({ url: "/admin/post/guardar-detalle-grupo", cache: false, type: "post", dataType: "json",
+                timeout: 3000,
+                success: function (res) {
+                    if (res.success === true) {
+                    }
+                }
+            });
+        }
     });
 
     $(document.body).on('click', '#search', function () {
