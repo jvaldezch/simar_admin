@@ -1,4 +1,8 @@
 <!-- Static navbar -->
+<div style="margin-left: 20px">
+  <a href="/admin"><img src="/images/simar_logo.png" style="width: 250px; float: left; margin-right: 10px"></a> <p style="line-height: 30px; margin: 0; font-size: 14px">Administrador de metadatos del SIMAR</p>
+</div>
+<div class="clearfix"></div>
 <nav class="navbar navbar-default navbar-blue">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -8,33 +12,55 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/admin" class="navbar-brand">
-        <img src="/images/simar.png" style="width: 100px; float: left"> | </a>
+      <!--<a href="/admin" class="navbar-brand">
+        <img src="/images/simar.png" style="width: 100px; float: left"> | </a>-->
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
+        <!--<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acervo de imágenes <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/admin/index/satmo">SATMO</a></li>
             <li><a href="/admin/index/satcoral">SATcoral</a></li>
           </ul>
-        </li>
+        </li>-->
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Metadata <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Metadatos <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/admin/index/categorias">Categorías</a></li>
-            <li><a href="/admin/index/productos">Productos</a></li>
+            <li><a href="/admin/index/grupos">Grupos</a></li>
+            <!--<li><a href="/admin/index/productos">Productos</a></li>-->
+            <li class="dropdown-submenu">
+              <a href="/admin/index/productos">Productos</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">NSST</a></li>
+                <li><a href="#">W-NSST</a></li>
+                <li class="dropdown-submenu">
+                  <a href="/admin/index/productos">Información vectorial</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/admin/index/poligonales">ANP regionales marinas</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
           </ul>
         </li>
-        <li class="dropdown">
+        <!--<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Información vectorial <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">ANP México</a></li>
             <li><a href="/admin/index/poligonales">ANP regionales</a></li>
           </ul>
+        </li>-->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bases de datos <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Resiliencia</a></li>
+            <li><a href="#">SNIB</a></li>
+            <li><a href="/admin/index/satmo">SATMO</a></li>
+            <li><a href="/admin/index/satcoral">SATcoral</a></li>
+          </ul>
         </li>
-        <!--<li><a href="/admin/index/bitacora">Bitacora</a></li>-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bitacora <span class="caret"></span></a>
           <ul class="dropdown-menu">

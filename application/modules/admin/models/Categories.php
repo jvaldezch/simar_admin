@@ -8,10 +8,23 @@ class Admin_Model_Categories {
         $this->_db_table = new Admin_Model_DbTable_Categories();
     }
 
-    public function obtener() {
+    public function obtenerCategorias() {
         try {
             $sql = $this->_db_table->select()
                     ->from($this->_db_table, array('*'))
+                    ->where("category_id IS NULL")
+                    ->order("name ASC");
+            return $sql;
+        } catch (Zend_Db_Exception $ex) {
+            throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
+        }
+    }
+
+    public function obtenerGrupos() {
+        try {
+            $sql = $this->_db_table->select()
+                    ->from($this->_db_table, array('*'))
+                    ->where("category_id IS NOT NULL")
                     ->order("name ASC");
             return $sql;
         } catch (Zend_Db_Exception $ex) {

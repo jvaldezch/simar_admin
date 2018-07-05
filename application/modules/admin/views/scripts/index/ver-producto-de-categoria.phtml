@@ -1,9 +1,4 @@
-<style>
-    #edit p {
-        color: #333;
-    }
-</style>
-<h4><strong>Producto de categoría</strong></h4>
+<h5><i class="fas fa-home"></i> <i class="fas fa-angle-double-right"></i> Metadatos <i class="fas fa-angle-double-right"></i> Productos</h5>
 
 <form id="form">
     <input type="hidden" id="id" name="id" value="<?= $this->id ?>" />
@@ -41,7 +36,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <button type="submit" id="submit" style="float: right">
+                    <button type="submit" id="submit" class="btn btn-primary pull-right">
                         <i class="far fa-save"></i> Guardar
                     </button>
                 </td>
@@ -52,11 +47,11 @@
 
 <h4>Metadata del producto</h4>
 
-<div id="editor" style="min-height: 250px">
-    <div id='edit' style="margin-top: 30px; min-height: 250px"></div>
+<div id="editor">
+    <div id='edit'></div>
     <br>    
 </div>
-<button class="btn btn-primary btn-sm pull-right" id="saveButton">
+<button class="btn btn-primary pull-right" id="saveButton">
     <i class="far fa-save"></i> Guardar</button>
 <a class="btn btn-success" href="javascript:void(0)" onclick="goBack()">
     <i class="fas fa-angle-double-left"></i> Regresar</a>
