@@ -12,52 +12,56 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <!--<a href="/admin" class="navbar-brand">
-        <img src="/images/simar.png" style="width: 100px; float: left"> | </a>-->
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <!--<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acervo de imágenes <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/admin/index/satmo">SATMO</a></li>
-            <li><a href="/admin/index/satcoral">SATcoral</a></li>
-          </ul>
-        </li>-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Metadatos <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/admin/index/categorias">Categorías</a></li>
-            <li><a href="/admin/index/grupos">Grupos</a></li>
-            <!--<li><a href="/admin/index/productos">Productos</a></li>-->
             <li class="dropdown-submenu">
-              <a href="/admin/index/productos">Productos</a>
+              <a href="/admin/index/categorias">Categorías</a>
               <ul class="dropdown-menu">
-                <li><a href="#">NSST</a></li>
-                <li><a href="#">W-NSST</a></li>
-                <li class="dropdown-submenu">
-                  <a href="/admin/index/productos">Información vectorial</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/admin/index/poligonales">ANP regionales marinas</a></li>
-                  </ul>
-                </li>
+                <?php if (isset($this->categorias)) { ?>
+                  <?php foreach ($this->categorias as $item) { ?>
+                    <li><a href="/admin/index/ver-categoria?id=<?= $item["id"] ?>"><?= filter_var($item["main_name"], FILTER_SANITIZE_STRING) ?></a></li>
+                  <?php } ?>
+                <?php } ?>
+              </ul>
+            </li>
+            <li class="dropdown-submenu">
+              <a href="/admin/index/grupos">Grupos</a>
+              <ul class="dropdown-menu">
+                <?php if (isset($this->grupos)) { ?>
+                  <?php foreach ($this->grupos as $item) { ?>
+                    <li><a href="/admin/index/ver-categoria?id=<?= $item["id"] ?>"><?= filter_var($item["main_name"], FILTER_SANITIZE_STRING) ?></a></li>
+                  <?php } ?>
+                <?php } ?>
+              </ul>
+            </li>
+            <li class="dropdown-submenu">
+              <a href="/admin/index/grupos">Productos</a>
+              <ul class="dropdown-menu">
+                <?php if (isset($this->productos)) { ?>
+                  <?php foreach ($this->productos as $item) { ?>
+                    <li><a href="/admin/index/ver-categoria?id=<?= $item["id"] ?>"><?= filter_var($item["title"], FILTER_SANITIZE_STRING) ?></a></li>
+                  <?php } ?>
+                <?php } ?>
               </ul>
             </li>
           </ul>
         </li>
-        <!--<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Información vectorial <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">ANP México</a></li>
-            <li><a href="/admin/index/poligonales">ANP regionales</a></li>
-          </ul>
-        </li>-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bases de datos <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Resiliencia</a></li>
             <li><a href="#">SNIB</a></li>
-            <li><a href="/admin/index/satmo">SATMO</a></li>
+            <li class="dropdown-submenu">
+              <a href="/admin/index/satmo">SATMO</a>
+              <ul class="dropdown-menu">
+                <li><a href="/admin/index/satmo?filter=nsst">NSST</a></li>
+                <li><a href="/admin/index/satmo?filter=w-nsst">W-NSST</a></li>
+              </ul>
+            </li>
             <li><a href="/admin/index/satcoral">SATcoral</a></li>
           </ul>
         </li>

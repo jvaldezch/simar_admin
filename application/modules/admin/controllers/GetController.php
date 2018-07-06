@@ -155,7 +155,7 @@ class Admin_GetController extends Zend_Controller_Action {
             $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
 
             $mppr = new Admin_Model_Categories();
-            $arr = $mppr->obtenerCategorias();
+            $arr = $mppr->obtenerGrupos();
 
             $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($arr));
             $paginator->setItemCountPerPage($input->size);

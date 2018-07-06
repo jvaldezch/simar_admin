@@ -29,6 +29,20 @@ class Admin_IndexController extends Zend_Controller_Action {
         } else {
                 $this->getResponse()->setRedirect('/');
         }
+        $mppr = new Admin_Model_Categories();
+        $arr = $mppr->obtenerMenuCategorias();
+        if (!empty($arr)) {
+                $this->view->categorias = $arr;
+        }
+        $arr = $mppr->obtenerMenuGrupos();
+        if (!empty($arr)) {
+                $this->view->grupos = $arr;
+        }
+        $mppr = new Admin_Model_CaProducts();
+        $arr = $mppr->obtenerMenuProductos();
+        if (!empty($arr)) {
+                $this->view->productos = $arr;
+        }
     }
     
     public function postDispatch() {
