@@ -17,6 +17,7 @@ window.verProductoDeCategoria = function (rid) {
                 $("#subtitle").val(res.results.subtitle);
                 $("#thumb_image").val(res.results.thumb_image);
                 $("#color_ramp_unit").val(res.results.color_ramp_unit);
+                $("#color_ramp").val(res.results.color_ramp);
                 editor.froalaEditor('html.set', res.results.description, true);
             }
         }
@@ -53,6 +54,7 @@ $(document).ready(function () {
         $("#form").ajaxSubmit({url: "/admin/post/guardar-parametros-producto-de-categoria", dataType: "json", timeout: 3000, type: "POST",
             success: function (res) {
                 if (res.success === true) {
+                    $.alert({title: "Confirmación", type: "blue", content: "La información se guardo.", boxWidth: "350px", useBootstrap: false});
                 }
             }
         });

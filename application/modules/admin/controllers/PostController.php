@@ -185,12 +185,35 @@ class Admin_PostController extends Zend_Controller_Action {
                 $f = array(
                     "*" => array("StringTrim"),
                     "id" => "Digits",
+                    "order" => "Digits",
                 );
                 $v = array(
                     "id" => array("NotEmpty", new Zend_Validate_Int()),
+                    "spanish_title" => array("NotEmpty"),
+                    "title" => array("NotEmpty"),
+                    "subtitle" => array("NotEmpty"),
+                    "thumb_image" => array("NotEmpty"),
+                    "color_ramp_unit" => array("NotEmpty"),
+                    "order" => array("NotEmpty", new Zend_Validate_Int()),
                 );
                 $input = new Zend_Filter_Input($f, $v, $r->getPost());
                 if ($input->isValid("id")) {
+
+                    $mppr = new Admin_Model_CaProducts();
+                    $arr = array(
+                        'spanish_title' => html_entity_decode($input->spanish_title), 
+                        'title' => html_entity_decode($input->title), 
+                        'subtitle' => html_entity_decode($input->subtitle), 
+                        'thumb_image' => html_entity_decode($input->thumb_image),
+                        'color_ramp_unit' => html_entity_decode($input->color_ramp_unit),
+                        'order' => $input->order,
+                        'updated_at' => date('Y-m-d H:i:s')
+                    );
+
+                    if ($mppr->actualizarProductoDeCaterogia($input->id, $arr)) {
+                        $this->_helper->json(array("success" => true));
+                    }
+
                     $this->_helper->json(array("success" => true));
                 } else {
                     throw new Exception("Invalid input!");

@@ -25,7 +25,7 @@ window.calendar = function(year, month) {
 };
 
 window.urlProducto = function(url, product) {
-    var url = '<a style="float:left; padding: 3px 3px" href="' + url + '" target="_blank">' + product + '</a>';
+    var url = '<a style="float:left; padding: 0 3px; clear: both" href="' + url + '" target="_blank">' + product + '</a>';
     return url;
 }
 

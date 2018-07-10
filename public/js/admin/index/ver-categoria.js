@@ -24,12 +24,14 @@ $(document).ready(function () {
         $('#edit').froalaEditor('save.save')
     });
 
-    $(document.body).on('click', '#submit', function () {
+    $(document.body).on('click', '#submit', function (ev) {
+        ev.preventDefault();
         if ($("#form").valid()) {
             $("#form").ajaxSubmit({ url: "/admin/post/guardar-detalle-categoria", cache: false, type: "post", dataType: "json",
                 timeout: 3000,
                 success: function (res) {
                     if (res.success === true) {
+                        $.alert({title: "Confirmación", type: "blue", content: "La información se guardo.", boxWidth: "350px", useBootstrap: false});
                     }
                 }
             });
