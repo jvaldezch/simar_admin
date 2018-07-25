@@ -39,7 +39,6 @@ class Default_PdfController extends Zend_Controller_Action {
             $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
             if ($input->isValid("year") && $input->isValid("week") && $input->isValid("anp")) {
 
-                // filename_pdf = os.path.join(os.path.dirname(filename_sba_png), os.path.basename(filename_sba_png)[:30] + "_ANP" + str(region['id']) + "_R-SBA-REPORT.pdf")
                 $mppr = new Default_Model_SatmoNc();
                 $arr = $mppr->obtener($input->year, $input->week, "satcoral", "sba");
 
@@ -55,7 +54,6 @@ class Default_PdfController extends Zend_Controller_Action {
 
                     if (file_exists($pdf_filename)) {
 
-                        //$filename = 'filename.pdf';
                         header('Content-type: application/pdf');
                         header('Content-Disposition: inline; filename="' . basename($pdf_filename) . '"');
                         header('Content-Transfer-Encoding: binary');
