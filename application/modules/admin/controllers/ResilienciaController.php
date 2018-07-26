@@ -56,6 +56,20 @@ class Admin_ResilienciaController extends Zend_Controller_Action {
                 ->appendFile("/js/admin/resiliencia/instituciones.js?" . time());
     }
 
+    public function sectoresAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Sectores";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/sectores.js?" . time());
+    }
+
+    public function adscripcionesAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Sectores";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/adscripciones.js?" . time());
+    }
+
     public function verInstitucionAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Institución";
         $this->view->headScript()
