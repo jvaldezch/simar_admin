@@ -70,11 +70,169 @@ class Admin_ResilienciaController extends Zend_Controller_Action {
                 ->appendFile("/js/admin/resiliencia/adscripciones.js?" . time());
     }
 
+    public function gradosAcademicosAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Grados académicos";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/grados-academicos.js?" . time());
+    }
+
+    public function especialistasAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Especialistas";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/especialistas.js?" . time());
+    }
+
+    public function proyectosAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Proyectos";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/proyectos.js?" . time());
+    }
+
     public function verInstitucionAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Institución";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/admin/resiliencia/ver-institucion.js?" . time());
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+        }
+    }
+
+    public function verEspecialistaAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Investigador o especialista";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/ver-especialista.js?" . time());
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+        }
+    }
+
+    public function verAdscripcionAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Adscripción";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/ver-adscripcion.js?" . time());
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+        }
+    }
+
+    public function verSectorAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Sector";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/ver-sector.js?" . time());
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+        }
+    }
+
+    public function verGradoAcademicoAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Grado académico";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/ver-grado-academico.js?" . time());
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+        }
+    }
+
+    public function verProyectoAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Proyecto";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/ver-proyecto.js?" . time());
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array(new Zend_Validate_Int()),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+        }
+    }
+
+    public function altaEspecialistaAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Alta especilista";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/alta-especialista.js?" . time());
+    }
+
+    public function altaInstitucionAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Alta institución";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/alta-institucion.js?" . time());
+    }
+
+    public function altaAdscripcionAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Alta adscripción";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/alta-adscripcion.js?" . time());
+    }
+
+    public function altaSectorAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Alta sector";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/alta-sector.js?" . time());
+    }
+
+    public function altaGradoAcademicoAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Alta grado académico";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/alta-grado-academico.js?" . time());
+    }
+
+    public function altaProyectoAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Alta proyecto";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/resiliencia/alta-proyecto.js?" . time());
     }
 
 }
