@@ -226,4 +226,31 @@ class Admin_PostController extends Zend_Controller_Action {
         }
     }
 
+
+
+    public function guardarResInstitucionAction() {
+        try {
+            $r = $this->getRequest();
+            if ($r->isPost()) {
+                $f = array(
+                    "*" => array("StringTrim"),
+                    "id" => "Digits",
+                );
+                $v = array(
+                    "id" => array("NotEmpty", new Zend_Validate_Int()),
+                );
+                $input = new Zend_Filter_Input($f, $v, $r->getPost());
+                if ($input->isValid("id")) {
+                    $this->_helper->json(array("success" => true));
+                } else {
+                    throw new Exception("Invalid input!");
+                }
+            } else {
+                throw new Exception("Invalid request type!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
 }

@@ -8,12 +8,32 @@ class Admin_Model_ResInstituciones {
         $this->_db_table = new Admin_Model_DbTable_ResInstituciones();
     }
 
-    public function obtener() {
+    public function obtener($search = null) {
         try {
             $sql = $this->_db_table->select()
                     ->from($this->_db_table, array('*'))
                     ->order("nombre ASC");
+            if (isset($search) && trim($search) !== '') {
+                $sql->where('nombre ILIKE ?', '%' . $search . '%');
+            }
             return $sql;
+        } catch (Zend_Db_Exception $ex) {
+            throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
+        }
+    }
+
+    public function institucion($rid) {
+        try {
+            $sql = $this->_db_table->select()
+                    //->setIntegrityCheck(false)
+                    ->from(array('i' => 'res_instituciones'), array('*'))
+                    //->joinLeft(array('s' => 'res_institucion_sectores'), 's.rid = i."ridSector"', array('nombre as nombre_sector'))
+                    ->where('i.rid = ?', $rid);
+            $stmt = $this->_db_table->fetchRow($sql);
+            if ($stmt) {
+                return $stmt->toArray();
+            }
+            return;
         } catch (Zend_Db_Exception $ex) {
             throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
         }

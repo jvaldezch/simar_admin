@@ -1,0 +1,19 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <a href="/admin/usuarios/ver-usuario?id=<?= $item["id"] ?>">
+                    <i class="fas fa-folder-open"></i></a></td>
+            <td><?= $item["name"] ?></td>
+            <td><?= $item["last_name"] ?></td>
+            <td><?= $item["email"] ?></td>
+            <td><?= date("d/m/Y", strtotime($item["created_at"])) ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="5">
+            <em>No hay usuarios</em>
+        </td>
+    </tr>
+<?php } ?>

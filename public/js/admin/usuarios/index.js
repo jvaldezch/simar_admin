@@ -1,5 +1,5 @@
 
-window.tableData = function (page, size, search) {
+window.tableData = function (page, size) {
     if (page === undefined) {
         page = 1;
     }
@@ -7,8 +7,8 @@ window.tableData = function (page, size, search) {
         size = $("#table-results-selector").val();
     }
     return $.ajax({
-        url: '/admin/get/res-instituciones',
-        data: { page: page, size: size, search: search },
+        url: '/admin/get/usuarios',
+        data: { page: page, size: size },
         beforeSend: function (res) {
             $("#table-results").LoadingOverlay("show", { color: "rgba(255, 255, 255, 0.9)" });
         },
@@ -29,13 +29,6 @@ $(document).ready(function () {
 
     $(document.body).on('click', '#update', function () {
         tableData();
-    });
-
-    $(document.body).on('click', '#search', function () {
-        var search = $("#table-results-search").val();
-        if (search !== '') {
-            tableData(undefined, undefined, search);
-        }
     });
     
 });

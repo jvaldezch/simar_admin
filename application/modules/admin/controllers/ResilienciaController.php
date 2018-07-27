@@ -93,8 +93,12 @@ class Admin_ResilienciaController extends Zend_Controller_Action {
 
     public function verInstitucionAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Institución";
+        $this->view->headLink()
+                ->appendStylesheet("/js/common/confirm/jquery-confirm.min.css");
         $this->view->headScript()
-                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/common/jquery.form.min.js")
+                ->appendFile("/js/common/jquery.validate.min.js")
+                ->appendFile("/js/common/confirm/jquery-confirm.min.js")
                 ->appendFile("/js/admin/resiliencia/ver-institucion.js?" . time());
         $f = array(
                 "*" => array("StringTrim", "StripTags"),
@@ -105,6 +109,9 @@ class Admin_ResilienciaController extends Zend_Controller_Action {
         );
         $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
         if ($input->isValid("id")) {
+                $mppr = new Admin_Model_ResInstituciones();
+                $arr = $mppr->institucion($input->id);
+                $this->view->arr = $arr;
         }
     }
 
