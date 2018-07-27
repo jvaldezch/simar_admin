@@ -1,3 +1,5 @@
 # Ini files
 */*.ini
+/application/configs/application.ini
 application/configs/*.ini
+/application/configs/*.ini
