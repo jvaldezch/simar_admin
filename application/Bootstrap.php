@@ -38,6 +38,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         return $autoLoader;
     }
 
+    protected function _initDatabase() {
+        $this->bootstrap('multidb');
+        $multidb = $this->getPluginResource('multidb');
+        $snib = $multidb->getDb('snib');
+        $snib->setFetchMode(Zend_Db::FETCH_OBJ);
+        Zend_Registry::set('snib', $snib);
+    }
+
     protected function _initSessions() {
     }
 
