@@ -1,5 +1,5 @@
 
-window.tableData = function (page, size) {
+window.tableProducts = function (page, size) {
     if (page === undefined) {
         page = 1;
     }
@@ -25,10 +25,10 @@ window.tableData = function (page, size) {
 
 $(document).ready(function () {
 
-    tableData();
+    tableProducts();
 
     $(document.body).on('click', '#update', function () {
-        tableData();
+        tableProducts();
     });
     
 });

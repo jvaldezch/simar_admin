@@ -1,5 +1,5 @@
 
-window.tableData = function (page, size, search) {
+window.tableProducts = function (page, size, search) {
     if (page === undefined) {
         page = 1;
     }
@@ -25,16 +25,16 @@ window.tableData = function (page, size, search) {
 
 $(document).ready(function () {
 
-    tableData();
+    tableProducts();
 
     $(document.body).on('click', '#update', function () {
-        tableData();
+        tableProducts();
     });
 
     $(document.body).on('click', '#search', function () {
         var search = $("#table-results-search").val();
         if (search !== '') {
-            tableData(undefined, undefined, search);
+            tableProducts(undefined, undefined, search);
         }
     });
     

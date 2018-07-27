@@ -1012,4 +1012,38 @@ class Admin_GetController extends Zend_Controller_Action {
         }
     }
 
+    public function snibAction() {
+        try {
+            $view = new Zend_View();
+            $view->setScriptPath(realpath(dirname(__FILE__)) . "/../views/scripts/get/");
+            $view->setHelperPath(realpath(dirname(__FILE__)) . "/../views/helpers/");
+
+            $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "page" => array("Digits"),
+                "size" => array("Digits"),
+            );
+            $v = array(
+                "page" => array(new Zend_Validate_Int(), "default" => 1),
+                "size" => array(new Zend_Validate_Int(), "default" => 20),
+                "search" => array("NotEmpty"),
+            );
+            $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+
+            $mppr = new Admin_Model_Snib();
+            $sql = $mppr->obtener($input->search);
+
+            $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($sql));
+            $paginator->setItemCountPerPage($input->size);
+            $paginator->setCurrentPageNumber($input->page);
+            $view->paginator = $paginator;
+
+            $paginatorControl = $view->paginationControl($paginator);
+
+            $this->_helper->json(array("success" => true, "results" => $view->render("snib.phtml"), "paginator" => $paginatorControl, "info" => $paginator->getPages()));
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
 }

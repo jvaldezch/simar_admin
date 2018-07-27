@@ -54,13 +54,25 @@ class Admin_SnibController extends Zend_Controller_Action {
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/admin/snib/index.js?" . time());
+    }
 
-        $db = Zend_Registry::get('snib');
-        $sql = $db->select()
-            ->from("config");
-        $stmt = $db->fetchRow($sql);
-        var_dump($stmt);
-
+    public function verEspecimenAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Especimen";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/snib/ver-especimen.js?" . time());
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+        );
+        $v = array(
+                "id" => array("NotEmpty"),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+                $mppr = new Admin_Model_Snib();
+                $arr = $mppr->obtenerEspecimen($input->id);
+                var_dump($arr);
+        }
     }
 
 }
