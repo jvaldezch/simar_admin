@@ -1,0 +1,23 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>">
+                    <i class="fas fa-folder-open"></i></a>
+            </td>
+            <td>
+            <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>">
+                <?= $item["spanish_title"] ?></a></td>
+            <td>
+                <a href="/admin/index/ver-producto-de-categoria?id=<?= $item["id"] ?>"><?= strtoupper($item["composition"]) ?></a>
+            </td>
+            <td><?= date("d/m/Y", strtotime($item["created_at"])) ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="3">
+            <em>No hay categorias</em>
+        </td>
+    </tr>
+<?php } ?>

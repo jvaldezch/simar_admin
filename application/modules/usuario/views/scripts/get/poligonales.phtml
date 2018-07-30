@@ -1,0 +1,20 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <a href="/admin/index/ver-poligonal?id=<?= $item["gid"] ?>">
+                    <i class="fas fa-folder-open"></i></a>
+            </td>
+            <td>
+                <a href="/admin/index/ver-poligonal?id=<?= $item["gid"] ?>"><?= $item["region"] ?></a>
+            </td>
+            <td><?= $item["anp"] ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="3">
+            <em>No hay categorias</em>
+        </td>
+    </tr>
+<?php } ?>

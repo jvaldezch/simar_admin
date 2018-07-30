@@ -4,6 +4,7 @@ class Auth_Sessions {
 
     protected $username;
     protected $password;
+    protected $role;
     protected $session;
     protected $sessionExp = 3600;
 
@@ -13,6 +14,14 @@ class Auth_Sessions {
 
     function setUsername($username) {
         $this->username = $username;
+    }
+
+    function getUsername() {
+        return $this->session->username;
+    }
+
+    function getRole() {
+        return $this->session->role;
     }
 
     public function __set($name, $value) {
@@ -65,6 +74,7 @@ class Auth_Sessions {
         }
         $this->session->authenticated = true;
         $this->session->username = $this->username;
+        $this->session->role = $this->role;
         $this->session->lock();
     }
 
@@ -76,6 +86,7 @@ class Auth_Sessions {
         if ($this->username == 'admin') {
             if ($this->password == 'admin20') {
 
+                $this->role = 'admin';
                 $this->_iniciarSesion();
 
                 $token = $this->_hash(Zend_Session::getId());
@@ -89,6 +100,25 @@ class Auth_Sessions {
                 return array("success" => false, "password" => "Contraseña no válida");
             }
         } else {
+            if ($this->username == 'user') {
+                if ($this->password == 'user20') {
+
+                    $this->role = 'user';
+                    $this->_iniciarSesion();
+    
+                    $token = $this->_hash(Zend_Session::getId());
+    
+                    setcookie('SimarPanelv1User', $this->username, time() + (3600 * 24 * 5), '/');
+                    setcookie('SimarPanelv1Session', $token, time() + (3600 * 24 * 5), '/');
+    
+                    return array("success" => true, "landing" => "/usuario");
+    
+                } else {
+                    return array("success" => false, "password" => "Contraseña no válida");
+                }
+            } else {
+                return array("success" => false, "username" => "Usuario no existe");
+            }
             return array("success" => false, "username" => "Usuario no existe");
         }
     }

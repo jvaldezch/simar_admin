@@ -1,0 +1,19 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <a href="/usuario/snib/ver-especimen?id=<?= $item->idejemplar ?>">
+                    <i class="fas fa-folder-open"></i></a></td>
+            <td><?= $item->grupobio ?></td>
+            <td><?= $item->subgrupobio ?></td>
+            <td><?= $item->familiavalida ?></td>
+            <td><?= $item->nombrecomun ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="5">
+            <em>No hay datos</em>
+        </td>
+    </tr>
+<?php } ?>

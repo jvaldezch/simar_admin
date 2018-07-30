@@ -1,5 +1,5 @@
 
-window.tableProducts = function (page, size) {
+window.tableProducts = function (page, size, search) {
     if (page === undefined) {
         page = 1;
     }
@@ -8,7 +8,7 @@ window.tableProducts = function (page, size) {
     }
     return $.ajax({
         url: '/admin/get/res-especialistas',
-        data: { page: page, size: size },
+        data: { page: page, size: size, search: search },
         beforeSend: function (res) {
             $("#table-results").LoadingOverlay("show", { color: "rgba(255, 255, 255, 0.9)" });
         },
@@ -29,6 +29,13 @@ $(document).ready(function () {
 
     $(document.body).on('click', '#update', function () {
         tableProducts();
+    });
+    
+    $(document.body).on('click', '#search', function () {
+        var search = $("#table-results-search").val();
+        if (search !== '') {
+            tableProducts(undefined, undefined, search);
+        }
     });
     
 });

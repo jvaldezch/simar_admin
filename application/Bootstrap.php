@@ -8,6 +8,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $controller->setControllerDirectory(array(
             'default' => APPLICATION_PATH . '/modules/default/controllers',
             'admin' => APPLICATION_PATH . '/modules/admin/controllers',
+            'usuario' => APPLICATION_PATH . '/modules/usuario/controllers',
         ));
     }
     

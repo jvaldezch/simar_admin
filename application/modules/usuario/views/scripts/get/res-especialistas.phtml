@@ -1,0 +1,26 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td style="width: 30px">
+                <a href="/usuario/resiliencia/ver-especialista?id=<?= $item["rid"] ?>">
+                    <i class="fas fa-folder-open"></i></a>
+            </td>
+            <td>
+                <?= $item["apellido_paterno"] ?></td>
+            </td>
+            <td>
+                <?= $item["apellido_materno"] ?></td>
+            </td>
+            <td>
+                <?= $item["nombre"] ?></td>
+            </td>
+            <td style="width: 100px"><?= date("d/m/Y", strtotime($item["creado"])) ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="3">
+            <em>No hay especialistas</em>
+        </td>
+    </tr>
+<?php } ?>

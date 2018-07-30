@@ -25,7 +25,11 @@ class Admin_IndexController extends Zend_Controller_Action {
     public function preDispatch() {
         $auth = new Auth_Sessions();
         if ($auth->isAuthenticated()) {
-                $auth->actualizar();
+                if ($auth->getRole() == 'admin') {
+                        $auth->actualizar();
+                } else {
+                        throw new Exception('Access restricted');
+                }
         } else {
                 $this->getResponse()->setRedirect('/');
         }
@@ -100,7 +104,6 @@ class Admin_IndexController extends Zend_Controller_Action {
                 $arr = $mppr->obtenerProducto($input->rid);
                 if (isset($arr)) {
                         $composition = $arr["composition"] = 'day' ? 'nsst' : $arr["compostion"];
-                        //$url = "http://35.196.161.155:8085/tiles/satmo/" . $arr["sensor"] . "/" . $composition . "/" . date("Y-m-d", strtotime($arr["product_date"])) . "/wmts/nsst/webmercator/{z}/{x}/{y}.png";
                         $url = "https://simar.conabio.gob.mx:8443/tiles/satmo/" . $arr["sensor"] . "/" . $composition . "/" . date("Y-m-d", strtotime($arr["product_date"])) . "/wmts/nsst/webmercator/{z}/{x}/{y}.png";
                         $this->view->url = $url;
                         $this->view->layerName = strtoupper($arr["sensor"]) . " " . date("Y-m-d", strtotime($arr["product_date"]));
@@ -317,13 +320,6 @@ class Admin_IndexController extends Zend_Controller_Action {
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/admin/index/poligonales.js?" . time());
-    }
-
-    public function bitacoraAction() {
-        $this->view->title = $this->_appConfig->getParam("title") . " | Log del servidor";
-        $this->view->headScript()
-                ->appendFile("/js/common/loadingoverlay.min.js")
-                ->appendFile("/js/admin/index/bitacora.js?" . time());   
     }
 
     public function calendarioAction() {

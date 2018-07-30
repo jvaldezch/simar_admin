@@ -14,7 +14,11 @@ class Admin_PostController extends Zend_Controller_Action {
     public function preDispatch() {
         $auth = new Auth_Sessions();
         if ($auth->isAuthenticated()) {
+            if ($auth->getRole() == 'admin') {
                 $auth->actualizar();
+            } else {
+                throw new Exception('Access restricted');
+            }
         } else {
             throw new Zend_Controller_Request_Exception("Session is required!");
         }

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+        <title><?= $this->filename ?></title>
+        <!-- Leaflet -->
+        <link rel="stylesheet" href="/js/common/leaflet/leaflet.css" />
+        <script src="/js/common/leaflet/leaflet.js"></script>
+        <script src="/js/common/leaflet-tilelayer-wmts.js"></script>
+        <script src="/js/common/jquery-1.12.4.min.js"></script>
+        <script src="/js/common/leaflet-wfst.src.js"></script>
+
+        <style>
+            body { margin:0; padding:0; }
+            body, table, tr, td, th, div, h1, h2, input { font-family: "Calibri", "Trebuchet MS", "Ubuntu", Serif; font-size: 11pt; }
+            #map { position:absolute; top:0; bottom:0; width:100%; } /* full size */
+            .ctl {
+                padding: 2px 10px 2px 10px;
+                background: white;
+                background: rgba(255,255,255,0.9);
+                box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                border-radius: 5px;
+                text-align: right;
+            }
+            .title {
+                font-size: 18pt;
+                font-weight: bold;
+            }
+            .src {
+                font-size: 10pt;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+    <div id="map"></div>
+
+    <script>
+        /* **** Leaflet **** */
+
+        // Base layers
+        //  .. OpenStreetMap
+        var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+
+        //  .. CartoDB Positron
+        var cartodb = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'});
+
+        //  .. OSM Toner
+        var toner = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.'});
+
+        //  .. White background
+        var white = L.tileLayer("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEX///+nxBvIAAAAH0lEQVQYGe3BAQ0AAADCIPunfg43YAAAAAAAAAAA5wIhAAAB9aK9BAAAAABJRU5ErkJggg==");
+
+        var template =
+            "//map1{s}.vis.earthdata.nasa.gov/wmts-webmerc/" +
+            "{layer}/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.jpg";
+
+        var blueMarbel = L.tileLayer(template, {
+            layer: "BlueMarble_ShadedRelief",
+            tileMatrixSet: "GoogleMapsCompatible_Level8",
+            maxZoom: 9,
+            time: "2013-11-04",
+            tileSize: 256,
+            subdomains: "abc",
+            noWrap: true,
+            continuousWorld: true,
+            bounds: [
+                [-85.0511287776, -179.999999975],
+                [85.0511287776, 179.999999975]
+            ],
+            attribution:
+                "<a href='https://wiki.earthdata.nasa.gov/display/GIBS'>" +
+                "NASA EOSDIS GIBS</a>&nbsp;&nbsp;&nbsp;" +
+                "<a href='https://github.com/nasa-gibs/web-examples/blob/release/examples/leaflet/webmercator-epsg3857.js'>" +
+                "View Source" +
+                "</a>"
+        });
+
+        var asterAttr = 'ASTER GDEM is a product of <a href="http://www.meti.go.jp/english/press/data/20090626_03.html" target="_blank">METI</a> and <a>href="https://lpdaac.usgs.gov/products/aster_policies" target="_blank">NASA</a>'; 
+
+        var osmRoads = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+            maxZoom: 18,
+        });
+
+        var lyr = L.tileLayer('<?= $this->url ?>', 
+            {tms: false, opacity: 1, attribution: ""
+        });
+
+        // Map
+        var map = L.map('map', {
+            center: [0.0, -0.00208952547398],
+            zoom: 6,
+            minZoom: 0,
+            maxZoom: 8,
+            layers: [osm]
+        });
+
+        var owsrootUrl = 'https://simar.conabio.gob.mx:8443/cgi-bin/mapserv';
+ 
+        var defaultParameters = {
+            map: '/mnt/arrakis/data/vectors/poligonales.map',
+            service: 'WFS',
+            version: '1.0.0',
+            request: 'GetFeature',
+            typeName: 'anp_regiones',
+            outputFormat: 'geojson',
+            //filter: '<Filter><PropertyIsEqualTo><PropertyName>gid</PropertyName><Literal>2</Literal></PropertyIsEqualTo></Filter>',
+        };
+        var parameters = L.Util.extend(defaultParameters);
+        var URL = owsrootUrl + L.Util.getParamString(parameters);
+
+        var poligonales = new L.geoJson(null, {
+            style: {"color": "#2ECCFA", "weight":2},
+            onEachFeature: function(feature, layer){
+                layer.bindPopup("You clicked on " + feature.properties.gid);
+            }
+        });
+        poligonales.addTo(map);
+
+        $.ajax({
+            dataType: "json",
+            url: URL,
+            success: function(data) {
+                $(data.features).each(function(key, data) {
+                    poligonales.addData(data);
+                });
+        }
+        }).error(function() {});
+
+        var basemaps = {"OpenStreetMap": osm, "CartoDB Positron": cartodb, "Stamen Toner": toner, "Without background": white, "GIBS Blue Marbel": blueMarbel, "OSM roads": osmRoads}
+        var overlaymaps = {
+            "<?= $this->layerName ?>": lyr,
+            "Poligonales": poligonales,
+        }
+
+        /*var boundaries = new L.WFS({
+            url: 'http://35.196.161.155:8085/cgi-bin/mapserv?map=/mnt/arrakis/data/vectors/poligonales.map',
+            //typeNS: 'topp',
+            typeName: 'anp_regiones',
+            //crs: L.CRS.EPSG4326,
+            geometryField: 'geom',
+            style: {
+                color: 'blue',
+                weight: 2
+            }
+        }, new L.Format.GeoJSON({crs: L.CRS.EPSG4326}))
+            .addTo(map)
+            .once('load', function () {
+            map.fitBounds(boundaries);
+        });*/
+
+        // Title
+        var title = L.control();
+        title.onAdd = function(map) {
+            this._div = L.DomUtil.create('div', 'ctl title');
+            this.update();
+            return this._div;
+        };
+        title.update = function(props) {
+            this._div.innerHTML = "MODIS Terra NSST";
+        };
+        title.addTo(map);
+
+        // Note
+        var src = 'Generated by <a href="http://www.klokan.cz/projects/gdal2tiles/">GDAL2Tiles</a>, Copyright &copy; 2008 <a href="http://www.klokan.cz/">Klokan Petr Pridal</a>,  <a href="http://www.gdal.org/">GDAL</a> &amp; <a href="http://www.osgeo.org/">OSGeo</a> <a href="http://code.google.com/soc/">GSoC</a>';
+        var title = L.control({position: 'bottomleft'});
+        title.onAdd = function(map) {
+            this._div = L.DomUtil.create('div', 'ctl src');
+            this.update();
+            return this._div;
+        };
+        title.update = function(props) {
+            this._div.innerHTML = src;
+        };
+        title.addTo(map);
+
+        map.addLayer(lyr)
+
+
+        // Add base layers
+        L.control.layers(basemaps, overlaymaps, {collapsed: false}).addTo(map);
+
+        // Fit to overlay bounds (SW and NE points with (lat, lon))
+        map.fitBounds([[<?= $this->yMin ?>, <?= $this->xMin ?>], [<?= $this->yMax ?>, <?= $this->xMax ?>]]);
+
+    </script>
+
+    </body>
+</html>
+
+        
+

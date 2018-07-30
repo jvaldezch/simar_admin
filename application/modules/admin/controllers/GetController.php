@@ -13,12 +13,13 @@ class Admin_GetController extends Zend_Controller_Action {
 
     public function preDispatch() {
         parent::preDispatch();
-        /*if (!$this->getRequest()->isXmlHttpRequest()) {
-            throw new Zend_Controller_Request_Exception("Not an AJAX request detected");
-        }*/
         $auth = new Auth_Sessions();
         if ($auth->isAuthenticated()) {
+            if ($auth->getRole() == 'admin') {
                 $auth->actualizar();
+            } else {
+                throw new Exception('Access restricted');
+            }
         } else {
             throw new Zend_Controller_Request_Exception("Session is required!");
         }
@@ -895,7 +896,7 @@ class Admin_GetController extends Zend_Controller_Action {
             $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
 
             $mppr = new Admin_Model_ResEspecialistas();
-            $arr = $mppr->obtener();
+            $arr = $mppr->obtener($input->search);
 
             $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($arr));
             $paginator->setItemCountPerPage($input->size);
