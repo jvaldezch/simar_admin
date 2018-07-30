@@ -72,7 +72,6 @@ class Admin_SnibController extends Zend_Controller_Action {
                 $mppr = new Admin_Model_Snib();
                 $arr = $mppr->obtenerEspecimen($input->id);
                 $this->view->arr = $arr;
-                //var_dump($arr);
         }
     }
 
