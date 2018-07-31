@@ -26,6 +26,8 @@ class Admin_IndexController extends Zend_Controller_Action {
         $auth = new Auth_Sessions();
         if ($auth->isAuthenticated()) {
                 if ($auth->getRole() == 'admin') {
+                        $this->view->profile = $auth->getProfile();
+                        $this->view->username = $auth->getUsername();
                         $auth->actualizar();
                 } else {
                         throw new Exception('Access restricted');

@@ -1,0 +1,58 @@
+<h5><i class="fas fa-home"></i> <i class="fas fa-angle-double-right"></i> Base de datos <i class="fas fa-angle-double-right"></i> Alta de usuario</h5>
+
+<form id="form">
+    <input type="hidden" id="id" name="id" value="<?= $this->arr['id'] ?>" />
+    <table class="table table-striped table-bordered table-hover simar-table">
+        <thead>
+            <tr>
+                <th style="width: 200px">Parámetro</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Usuario:</td>
+                <td>
+                    <input class="form-control" value="<?= $this->arr['username'] ?>" />
+                </td>
+            </tr>
+            <tr>
+                <td>Nombre:</td>
+                <td>
+                    <input class="form-control" id="name" name="name" value="<?= $this->arr['name'] ?>" readonly="true" />
+                </td>
+            </tr>
+            <tr>
+                <td>Apellido:</td>
+                <td>
+                    <input class="form-control" id="last_name" name="last_name" value="<?= $this->arr['last_name'] ?>" readonly="true" /></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>
+                    <input class="form-control" id="email" name="email" value="<?= $this->arr['email'] ?>" readonly="true" /></td>
+            </tr>
+            <tr>
+                <td>Rol:</td>
+                <td>
+                    <select class="form-control" name="role" id="role" readonly="true">
+                        <?php if (isset($this->roles)) { ?>
+                            <option value="">---</option>
+                            <?php foreach ($this->roles as $item) { ?>
+                                <option value="<?= $item["name"] ?>"><?= $item["description"] ?></option>
+                            <?php } ?>
+                        <?php } ?>
+                    </select></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button type="submit" id="submit" class="btn btn-primary pull-right" disabled="true">
+                        <i class="far fa-save"></i> Guardar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<a class="btn btn-success" href="/admin/usuarios/administrador">Regresar</a>

@@ -26,6 +26,8 @@ class Admin_UsuariosController extends Zend_Controller_Action {
         $auth = new Auth_Sessions();
         if ($auth->isAuthenticated()) {
                 if ($auth->getRole() == 'admin') {
+                        $this->view->profile = $auth->getProfile();
+                        $this->view->username = $auth->getUsername();
                         $auth->actualizar();
                 } else {
                         throw new Exception('Access restricted');
@@ -60,6 +62,39 @@ class Admin_UsuariosController extends Zend_Controller_Action {
                 ->appendFile("/js/admin/usuarios/index.js?" . time());
     }
 
+    public function administradorAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Usuarios";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/usuarios/administrador.js?" . time());
+    }
+
+    public function verUsuarioAdministradorAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Usuario";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/usuarios/ver-usuario-administrador.js?" . time());
+        $f = array(
+                "*" => array("StringTrim", "StripTags"),
+                "id" => array("Digits"),
+        );
+        $v = array(
+                "id" => array("NotEmpty"),
+        );
+        $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
+        if ($input->isValid("id")) {
+                $mppr = new Admin_Model_UsersAdmin();
+                $arr = $mppr->obtenerUsuario($input->id);
+                $this->view->arr = $arr;
+
+                $mppr = new Admin_Model_UsersRoles();
+                $arr = $mppr->obtener();
+                if (!empty($arr)) {
+                        $this->view->roles = $arr;
+                }
+        }
+    }
+
     public function verUsuarioAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Usuario registrado";
         $this->view->headScript()
@@ -74,6 +109,18 @@ class Admin_UsuariosController extends Zend_Controller_Action {
         );
         $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
         if ($input->isValid("id")) {
+        }
+    }
+
+    public function altaUsuarioAdministradorAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | Alta de usuario";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/usuarios/alta-usuario-administrador.js?" . time());
+        $mppr = new Admin_Model_UsersRoles();
+        $arr = $mppr->obtener();
+        if (!empty($arr)) {
+                $this->view->roles = $arr;
         }
     }
 
