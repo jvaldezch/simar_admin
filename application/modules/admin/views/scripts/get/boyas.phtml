@@ -1,0 +1,20 @@
+<?php if (isset($this->paginator)) { ?>
+    <?php foreach ($this->paginator as $item) { ?>
+        <tr>
+            <td>
+                <a href="/admin/boyas/ver-boya?id=<?= $item["id"] ?>">
+                    <i class="fas fa-folder-open"></i></a>
+            </td>
+            <td><?= $item["code"] ?></td>
+            <td><?= $item["name"] ?></td>
+            <td><?= $item["latitude"] ?></td>
+            <td><?= $item["longitude"] ?></td>
+        </tr>
+    <?php } ?>
+<?php } else { ?>
+    <tr>
+        <td colspan="7">
+            <em>No hay boyas virtuales</em>
+        </td>
+    </tr>
+<?php } ?>
