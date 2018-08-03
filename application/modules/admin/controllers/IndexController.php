@@ -324,6 +324,13 @@ class Admin_IndexController extends Zend_Controller_Action {
                 ->appendFile("/js/admin/index/poligonales.js?" . time());
     }
 
+    public function bitacoraAction() {
+        $this->view->title = $this->_appConfig->getParam("title") . " | ANP regionales";
+        $this->view->headScript()
+                ->appendFile("/js/common/loadingoverlay.min.js")
+                ->appendFile("/js/admin/index/bitacora.js?" . time());
+    }
+
     public function calendarioAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Calendario";
         $this->view->headScript()
