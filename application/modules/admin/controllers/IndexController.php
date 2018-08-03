@@ -325,7 +325,7 @@ class Admin_IndexController extends Zend_Controller_Action {
     }
 
     public function bitacoraAction() {
-        $this->view->title = $this->_appConfig->getParam("title") . " | ANP regionales";
+        $this->view->title = $this->_appConfig->getParam("title") . " | Bitacora";
         $this->view->headScript()
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/admin/index/bitacora.js?" . time());
