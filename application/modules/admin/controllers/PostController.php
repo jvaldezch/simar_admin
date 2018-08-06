@@ -230,8 +230,6 @@ class Admin_PostController extends Zend_Controller_Action {
         }
     }
 
-
-
     public function guardarResInstitucionAction() {
         try {
             $r = $this->getRequest();
@@ -245,6 +243,40 @@ class Admin_PostController extends Zend_Controller_Action {
                 );
                 $input = new Zend_Filter_Input($f, $v, $r->getPost());
                 if ($input->isValid("id")) {
+                    $this->_helper->json(array("success" => true));
+                } else {
+                    throw new Exception("Invalid input!");
+                }
+            } else {
+                throw new Exception("Invalid request type!");
+            }
+        } catch (Exception $ex) {
+            $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));
+        }
+    }
+
+    public function errorImagenAction() {
+        try {
+            $r = $this->getRequest();
+            if ($r->isPost()) {
+                $f = array(
+                    "*" => array("StringTrim"),
+                    "rid" => "Digits",
+                    "error" => "StringToLower",
+                );
+                $v = array(
+                    "rid" => array("NotEmpty", new Zend_Validate_Int()),
+                    "error" => array("NotEmpty"),
+                );
+                $input = new Zend_Filter_Input($f, $v, $r->getPost());
+                if ($input->isValid("rid")) {
+                    $error = filter_var($input->error, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+                    $mppr = new Admin_Model_SatmoNc();
+                    $arr = array(
+                        "updated" => date("Y-m-d H:i:s"),
+                        "error" => $error,
+                    );
+                    $mppr->actualizar($input->rid, $arr);
                     $this->_helper->json(array("success" => true));
                 } else {
                     throw new Exception("Invalid input!");

@@ -327,6 +327,7 @@ class Admin_GetController extends Zend_Controller_Action {
                             $arr["y_min"] = $v["y_min"];
                             $arr["x_max"] = $v["x_max"];
                             $arr["y_max"] = $v["y_max"];
+                            $arr["error"] = $v["error"];
                         }
                         if ($v["format"] == 'mapserver') {
                             $arr["url"] = $v["path"];

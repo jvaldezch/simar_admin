@@ -13,7 +13,7 @@ class Admin_Model_SatmoNcRs {
             $sql = $this->_db_table->select()
                     ->setIntegrityCheck(false)
                     ->from(array("r" => "ocean_color_satmo_nc_rs"), array('filename', 'path', 'min', 'max', 'projection', 'bit_depth', 'pix_res', 'mean', 'std_dev', 'no_data', 'x_min', 'y_min', 'x_max', 'y_max', 'format'))
-                    ->joinLeft(array("n" => "ocean_color_satmo_nc"), 'n."rid" = r."ridNc"', array('year', 'day', 'composition', 'week', 'month', 'product', 'sensor', 'product_date', 'created', 'product_end'))
+                    ->joinLeft(array("n" => "ocean_color_satmo_nc"), 'n."rid" = r."ridNc"', array('year', 'day', 'composition', 'week', 'month', 'product', 'sensor', 'product_date', 'created', 'product_end', 'error'))
                     ->where('r."ridNc" = ?', $ridNc);
             $stmt = $this->_db_table->fetchAll($sql);
             if ($stmt) {
@@ -30,7 +30,7 @@ class Admin_Model_SatmoNcRs {
             $sql = $this->_db_table->select()
                     ->setIntegrityCheck(false)
                     ->from(array("r" => "ocean_color_satmo_nc_rs"), array('filename', 'path', 'min', 'max', 'projection', 'bit_depth', 'pix_res', 'mean', 'std_dev', 'no_data', 'x_min', 'y_min', 'x_max', 'y_max', 'format'))
-                    ->joinLeft(array("n" => "ocean_color_satmo_nc"), 'n."rid" = r."ridNc"', array('year', 'day', 'composition', 'week', 'month', 'product', 'sensor', 'product_date', 'created', 'product_end'))
+                    ->joinLeft(array("n" => "ocean_color_satmo_nc"), 'n."rid" = r."ridNc"', array('year', 'day', 'composition', 'week', 'month', 'product', 'sensor', 'product_date', 'created', 'product_end', 'error'))
                     ->where('r."ridNc" = ?', $ridNc)
                     ->where('r."format" = \'GTiff\'');
             $stmt = $this->_db_table->fetchRow($sql);

@@ -43,6 +43,9 @@ window.verProducto = function (rid) {
                     $("#downloadPng").attr('href', res.results.png)
                         .show();
                 }
+                if (res.results.error == true) {
+                    $("#image-error").prop("checked", true);
+                }
                 obtenerMetadata(res.results.composition);
             }
         }
@@ -72,5 +75,44 @@ window.obtenerMetadata = function (composition) {
 $(document).ready(function () {
 
     verProducto(getAllUrlParams().rid);
+
+    $(document.body).on('click', '#image-error', function (e) {
+        e.preventDefault();
+        if($(this).prop('checked')) {
+            $.confirm({title: "Establecer error", escapeKey: "cerrar", boxWidth: "350px", useBootstrap: false, type: "red",
+                buttons: {
+                    si: {btnClass: "btn-red", action: function () {
+                            $.ajax({url: "/admin/post/error-imagen", dataType: "json", timeout: 10000, type: "POST",
+                                data: {rid: getAllUrlParams().rid, error: true},
+                                success: function (res) {
+                                    if (res.success === true) {
+                                        $("#image-error").prop("checked", true);
+                                    }
+                                }
+                            });
+                    }},
+                    no: {action: function () {}}
+                },
+                content: "¿Está seguro que desea establecer esta imagen con error? En caso de confirmar, tendrá bandera de error y <strong>no podrá ser utilizada</strong> para procesamientos o estadísticas."
+            });
+        } else {
+            $.confirm({title: "Remover error", escapeKey: "cerrar", boxWidth: "350px", useBootstrap: false, type: "red",
+                buttons: {
+                    si: {btnClass: "btn-red", action: function () {
+                            $.ajax({url: "/admin/post/error-imagen", dataType: "json", timeout: 10000, type: "POST",
+                                data: {rid: getAllUrlParams().rid, error: false},
+                                success: function (res) {
+                                    if (res.success === true) {
+                                        $("#image-error").prop("checked", false);
+                                    }
+                                }
+                            });
+                    }},
+                    no: {action: function () {}}
+                },
+                content: "¿Está seguro que desea remover el estatus de error? En caso de confirmar, la imagen <strong>será utilizada</strong> para procesamientos o estadísticas."
+            });
+        }
+    });
 
 });

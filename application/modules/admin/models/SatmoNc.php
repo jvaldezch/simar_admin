@@ -173,4 +173,16 @@ class Admin_Model_SatmoNc {
         }
     }
 
+    public function actualizar($rid, $arr) {
+        try {
+            $stmt = $this->_db_table->update($arr, array("rid = ?" => $rid));
+            if ($stmt) {
+                return true;
+            }
+            return;
+        } catch (Zend_Db_Exception $ex) {
+            throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
+        }
+    }
+
 }

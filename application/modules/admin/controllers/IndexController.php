@@ -89,7 +89,10 @@ class Admin_IndexController extends Zend_Controller_Action {
 
     public function verProductoAction() {
         $this->view->title = $this->_appConfig->getParam("title") . " | Producto";
+        $this->view->headLink()
+                ->appendStylesheet("/js/common/confirm/jquery-confirm.min.css");
         $this->view->headScript()
+                ->appendFile("/js/common/confirm/jquery-confirm.min.js")
                 ->appendFile("/js/common/loadingoverlay.min.js")
                 ->appendFile("/js/common/common.js")
                 ->appendFile("/js/admin/index/ver-producto.js?" . time());
