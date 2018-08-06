@@ -36,20 +36,48 @@ class Admin_GetController extends Zend_Controller_Action {
                 "page" => array("Digits"),
                 "size" => array("Digits"),
                 "year" => array("Digits"),
+                "sortMin" => array("Digits"),
+                "sortMax" => array("Digits"),
                 "type" => array("StringToLower"),
             );
             $v = array(
                 "page" => array(new Zend_Validate_Int(), "default" => 1),
                 "size" => array(new Zend_Validate_Int(), "default" => 20),
                 "year" => array(new Zend_Validate_Int()),
+                "sortMin" => array('NotEmpty', new Zend_Validate_Int()),
+                "sortMax" => array('NotEmpty', new Zend_Validate_Int()),
                 "type" => array("NotEmpty"),
+                "search" => array("NotEmpty"),
             );
             $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
 
             $mppr = new Admin_Model_SatmoNc();
-            $arr = $mppr->obtener($input->year, 'ghrsst', $input->type);
+            $sql = $mppr->obtener($input->year, 'ghrsst', $input->type);
+            if ($input->isValid('search')) {
+                $sql->where('n.filename ILIKE ?', "%" . $input->search . "%");
+            }
+            if ($input->isValid('sortMin') || $input->isValid('sortMax')) {
+                if ($input->isValid('sortMin')) {
+                    if ((int) $input->sortMin == 1) {
+                        $sql->order('r.min ASC');
+                    } 
+                    if ((int) $input->sortMin == 0) {
+                        $sql->order('r.min DESC');
+                    }
+                }
+                if ($input->isValid('sortMax')) {
+                    if ((int) $input->sortMax == 1) {
+                        $sql->order('r.max ASC');
+                    } 
+                    if ((int) $input->sortMax == 0) {
+                        $sql->order('r.max DESC');
+                    }
+                }
+            } else {
+                $sql->order('n.product_date DESC');
+            }
 
-            $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($arr));
+            $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($sql));
             $paginator->setItemCountPerPage($input->size);
             $paginator->setCurrentPageNumber($input->page);
             $view->paginator = $paginator;
@@ -87,7 +115,12 @@ class Admin_GetController extends Zend_Controller_Action {
             $input = new Zend_Filter_Input($f, $v, $this->_request->getParams());
 
             $mppr = new Admin_Model_SatmoNc();
-            $arr = $mppr->obtener($input->year, 'satcoral', $input->type);
+            if (in_array($input->type, array('wy-nsst'))) {
+                $product_type = 'ghrsst';
+            } else {
+                $product_type = 'satcoral';
+            }
+            $arr = $mppr->obtener($input->year, $product_type, $input->type);
 
             $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($arr));
             $paginator->setItemCountPerPage($input->size);
@@ -513,7 +546,7 @@ class Admin_GetController extends Zend_Controller_Action {
                 } else{
                     $content = '';
                 }
-                $this->_helper->json(array("success" => true, "results" => $content));
+                $this->_helper->json(array("success" => true, "results" => $content, "filename" => $input->filename));
             }
         } catch (Exception $ex) {
             $this->_helper->json(array("success" => false, "message" => $ex->getMessage()));

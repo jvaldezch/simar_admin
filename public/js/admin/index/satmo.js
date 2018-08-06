@@ -1,4 +1,7 @@
-window.tableProducts = function (page, size, type, year) {
+var sortMin = undefined;
+var sortMax = undefined;
+
+window.tableProducts = function (page, size, type, year, search) {
     if (page === undefined) {
         page = 1;
     }
@@ -13,25 +16,7 @@ window.tableProducts = function (page, size, type, year) {
     }
     return $.ajax({
         url: '/admin/get/productos-satmo',
-        data: { page: page, size: size, type: type, year: year },
-        beforeSend: function (res) {
-            $("#table-results").LoadingOverlay("show", { color: "rgba(255, 255, 255, 0.9)" });
-        },
-        success: function (res) {
-            $("#table-results").LoadingOverlay("hide", true);
-            if (res.success === true) {
-                $("table#results tbody").html(res.results);
-                $("#table-results-paginator").html(res.paginator);
-                $("#table-results-info").html("Página " + res.info.current + " de " + res.info.pageCount);
-            }
-        }
-    });
-};
-
-window.searchProduct = function (search) {
-    return $.ajax({
-        url: '/admin/get/buscar-producto',
-        data: { search: search },
+        data: { page: page, size: size, type: type, year: year, search: search, sortMin: sortMin, sortMax: sortMax },
         beforeSend: function (res) {
             $("#table-results").LoadingOverlay("show", { color: "rgba(255, 255, 255, 0.9)" });
         },
@@ -76,7 +61,7 @@ $(document).ready(function () {
     $(document.body).on('click', '#search', function () {
         var search = $("#table-results-search").val();
         if (search !== '') {
-            searchProduct(search);
+            tableProducts(undefined, undefined, undefined, undefined, search);
         }
     });
 
@@ -103,6 +88,38 @@ $(document).ready(function () {
                     return 'context-menu-icon context-menu-icon-quit';
                 }
             }
+        }
+    });
+
+    $(document.body).on('click', '.sort-min', function (e) {
+        sortMax = false;
+        if (sortMin == false) {
+            sortMin = 1;
+        } else {
+            if (sortMin == 1) 
+                sortMin = 0;
+            else
+                sortMin = 1;
+        }
+        tableProducts();
+    });
+
+    $(document.body).on('click', '.sort-max', function (e) {
+        sortMin = false;
+        if (sortMax == false) {
+            sortMax = 1;
+        } else {
+            if (sortMax == 1) 
+                sortMax = 0;
+            else
+                sortMax = 1;
+        }
+        tableProducts();
+    });
+
+    $(document.body).on('keyup', '#table-results-search', function (e) {
+        if(e.keyCode == 13) {
+            $('#search').trigger("click");
         }
     });
 

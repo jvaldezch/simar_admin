@@ -8,32 +8,21 @@ class Admin_Model_SatmoNc {
         $this->_db_table = new Admin_Model_DbTable_SatmoNc();
     }
 
-    public function obtener($year = null, $sensor = null, $type = null) {
+    public function obtener($year = null, $sensor = null, $type = null, $search = null) {
         try {
             $sql = $this->_db_table->select()
-                    ->from($this->_db_table, array('*'))
-                    ->order("product_date DESC");
+                    ->setIntegrityCheck(false)
+                    ->from(array('n' => 'ocean_color_satmo_nc'), array('*'))
+                    ->joinLeft(array('r' => 'ocean_color_satmo_nc_rs'), 'r."ridNc" = n."rid" AND r."format" = \'GTiff\'', array('min', 'max'));
             if (isset($year)) {
-                $sql->where('year = ?', $year);
+                $sql->where('n.year = ?', $year);
             }
             if (isset($sensor)) {
-                $sql->where('sensor = ?', $sensor);
+                $sql->where('n.sensor = ?', $sensor);
             }
             if (isset($type)) {
-                $sql->where('composition = ?', $type);
+                $sql->where('n.composition = ?', $type);
             }
-            return $sql;
-        } catch (Zend_Db_Exception $ex) {
-            throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());
-        }
-    }
-
-    public function buscar($search) {
-        try {
-            $sql = $this->_db_table->select()
-                    ->from($this->_db_table, array('*'))
-                    ->where("filename LIKE ?", "%" . $search . "%")
-                    ->order("product_date DESC");
             return $sql;
         } catch (Zend_Db_Exception $ex) {
             throw new Exception("DB Exception found on " . __METHOD__ . ": " . $ex->getMessage());

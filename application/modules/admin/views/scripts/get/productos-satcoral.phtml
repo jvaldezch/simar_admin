@@ -25,7 +25,9 @@
                 <?php if (file_exists($png)) { ?>
                     <a class="btn btn-xs btn-success" href="<?= str_replace($this->dataDir, $this->satmoDir, $png) ?>" target="_blank" title="Descargar PNG"><i class="fas fa-image"></i></a>
                 <?php } ?>
-            </td>   
+            </td>
+            <td><?= number_format($item["min"], 4, '.', '') ?></td>
+            <td><?= number_format($item["max"], 4, '.', '') ?></td>
             <td><?= date("d/m/Y", strtotime($item["product_date"])) ?></td>
         </tr>
     <?php } ?>
