@@ -312,3 +312,8 @@ ul.simar-menu li a:hover {
 form label.error {
   color: red;
 }
+
+.table-hover > tbody > tr:hover,
+.simar-table tbody tr:nth-child(2n):hover {
+  color: #bbeeff;
+}
