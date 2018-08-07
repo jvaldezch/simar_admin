@@ -315,5 +315,5 @@ form label.error {
 
 .table-hover > tbody > tr:hover,
 .simar-table tbody tr:nth-child(2n):hover {
-  color: #bbeeff;
+  background-color: #bbeeff;
 }
