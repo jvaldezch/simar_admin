@@ -17,6 +17,9 @@
             <td><?= $item["product"] ?></td>
             <td>
                 <a href="<?= str_replace($this->dataDir, $this->satmoDir, $item["path"]) ?>"><?= $item["filename"] ?></a>
+                <?php if ($item["error"] == true) { ?>
+                    <i class="fas fa-exclamation-triangle" style="color: red; font-size: 10px"></i>
+                <?php } ?>
             </td>
             <td>
                 <?php if (file_exists($kmz)) { ?>

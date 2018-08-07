@@ -31,6 +31,9 @@
     <label>Fin: </label> <input type="text" id="table-results-dateend" style="width: 80px" value="" />
     <div>
         <label>Buscar: </label> <input type="text" id="table-results-search" style="width: 450px"/><button id="search">Buscar</button>
+        <div class="pull-right">
+            <p><i class="fas fa-exclamation-triangle" style="color: red; font-size: 11px"></i> Imagen marcada con error</p>
+        </div>
     </div>
     <br>
     <table class="table table-striped table-bordered table-hover simar-table" id="results">
@@ -50,7 +53,8 @@
                     <i class="fa fa-sort float-right sort-min" aria-hidden="true" style="cursor: pointer"></i> Min</th>
                 <th>
                     <i class="fa fa-sort float-right sort-max" aria-hidden="true" style="cursor: pointer"></i> Max</th>
-                <th>Fecha</th>
+                <th>
+                    <i class="fa fa-sort float-right sort-date" aria-hidden="true" style="cursor: pointer"></i> Fecha</th>
             </tr>
         </thead>
         <tbody>

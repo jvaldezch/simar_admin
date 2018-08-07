@@ -1,5 +1,6 @@
 var sortMin = undefined;
 var sortMax = undefined;
+var sortDate = undefined;
 
 window.tableProducts = function (page, size, type, year, search) {
     if (page === undefined) {
@@ -16,7 +17,7 @@ window.tableProducts = function (page, size, type, year, search) {
     }
     return $.ajax({
         url: '/admin/get/productos-satmo',
-        data: { page: page, size: size, type: type, year: year, search: search, sortMin: sortMin, sortMax: sortMax },
+        data: { page: page, size: size, type: type, year: year, search: search, sortMin: sortMin, sortMax: sortMax, sortDate: sortDate },
         beforeSend: function (res) {
             $("#table-results").LoadingOverlay("show", { color: "rgba(255, 255, 255, 0.9)" });
         },
@@ -93,6 +94,7 @@ $(document).ready(function () {
 
     $(document.body).on('click', '.sort-min', function (e) {
         sortMax = false;
+        sortDate = false;
         if (sortMin == false) {
             sortMin = 1;
         } else {
@@ -106,6 +108,7 @@ $(document).ready(function () {
 
     $(document.body).on('click', '.sort-max', function (e) {
         sortMin = false;
+        sortDate = false;
         if (sortMax == false) {
             sortMax = 1;
         } else {
@@ -113,6 +116,20 @@ $(document).ready(function () {
                 sortMax = 0;
             else
                 sortMax = 1;
+        }
+        tableProducts();
+    });
+
+    $(document.body).on('click', '.sort-date', function (e) {
+        sortMax = false;
+        sortMin = false;
+        if (sortDate == false) {
+            sortDate = 1;
+        } else {
+            if (sortDate == 1) 
+            sortDate = 0;
+            else
+            sortDate = 1;
         }
         tableProducts();
     });

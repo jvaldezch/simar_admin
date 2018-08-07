@@ -38,6 +38,7 @@ class Admin_GetController extends Zend_Controller_Action {
                 "year" => array("Digits"),
                 "sortMin" => array("Digits"),
                 "sortMax" => array("Digits"),
+                "sortDate" => array("Digits"),
                 "type" => array("StringToLower"),
             );
             $v = array(
@@ -46,6 +47,7 @@ class Admin_GetController extends Zend_Controller_Action {
                 "year" => array(new Zend_Validate_Int()),
                 "sortMin" => array('NotEmpty', new Zend_Validate_Int()),
                 "sortMax" => array('NotEmpty', new Zend_Validate_Int()),
+                "sortDate" => array('NotEmpty', new Zend_Validate_Int()),
                 "type" => array("NotEmpty"),
                 "search" => array("NotEmpty"),
             );
@@ -56,7 +58,7 @@ class Admin_GetController extends Zend_Controller_Action {
             if ($input->isValid('search')) {
                 $sql->where('n.filename ILIKE ?', "%" . $input->search . "%");
             }
-            if ($input->isValid('sortMin') || $input->isValid('sortMax')) {
+            if ($input->isValid('sortMin') || $input->isValid('sortMax') || $input->isValid('sortDate')) {
                 if ($input->isValid('sortMin')) {
                     if ((int) $input->sortMin == 1) {
                         $sql->order('r.min ASC');
@@ -71,6 +73,14 @@ class Admin_GetController extends Zend_Controller_Action {
                     } 
                     if ((int) $input->sortMax == 0) {
                         $sql->order('r.max DESC');
+                    }
+                }
+                if ($input->isValid('sortDate')) {
+                    if ((int) $input->sortDate == 1) {
+                        $sql->order('n.product_date ASC');
+                    } 
+                    if ((int) $input->sortDate == 0) {
+                        $sql->order('n.product_date DESC');
                     }
                 }
             } else {
