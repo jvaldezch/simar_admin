@@ -21,8 +21,7 @@ class Application_Form_Login extends Zend_Form {
             'placeholder' => "Usuario",
             'required' => true,
             'label' => 'Usuario:',
-            //'title' => 'Proporcionar usuario',
-            'attribs' => array('class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus', 'autocomplete' => 'off'),
+            'attribs' => array('class' => 'form-control', 'required' => 'required', 'autofocus' => 'autofocus', 'autocomplete' => 'off', 'disabled' => 'true'),
         ));
 
         $this->addElement('password', 'password', array(
@@ -33,15 +32,14 @@ class Application_Form_Login extends Zend_Form {
             'placeholder' => "Contraseña",
             'required' => true,
             'label' => 'Contraseña:',
-            //'title' => 'Proporcionar contraseña de acceso',
-            'attribs' => array('class' => 'form-control', 'required' => 'required'),
+            'attribs' => array('class' => 'form-control', 'required' => 'required', 'disabled' => 'true'),
         ));
 
         $this->addElement('submit', 'login', array(
             'required' => false,
             'ignore' => true,
             'label' => 'Acceder',
-            'attribs' => array('id' => 'submit'),
+            'attribs' => array('id' => 'submit', 'disabled' => 'true'),
         ));
         
     }
